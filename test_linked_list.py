@@ -1,0 +1,1 @@
+""" For each method in a class, implement a test verifying that it works"""

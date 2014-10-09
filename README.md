@@ -1,4 +1,5 @@
 data-structures
 ===============
 
-Implement a singly linked list in Python
+This will hold sample code for a number of classic data structures
+implemented in Python
