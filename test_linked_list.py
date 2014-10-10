@@ -25,14 +25,20 @@ class MyTest(unittest.TestCase):
 
     def test_llist_init(self):
         """test linked_list initializes to a tuple of nodes"""
-        tlist = linked_list.Linked_list(1, 2)
+        tlist = linked_list.Linked_list(1, 'a')
         actual = (tlist.llist[0].val,
                   tlist.llist[0].ref,
                   tlist.llist[0].ref_to,
                   tlist.llist[1].val,
                   tlist.llist[1].ref,
                   tlist.llist[1].ref_to)
-        expected = (2, 1, 0, 1, 0, None)
+        expected = ('a', 1, 0, 1, 0, None)
+        self.assertEquals(expected, actual)
+
+    def test_size(self):
+        tlist = linked_list.Linked_list(1, 'a', 100)
+        expected = 3
+        actual = tlist.size
         self.assertEquals(expected, actual)
 
 
