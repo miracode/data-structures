@@ -40,7 +40,7 @@ class Linked_list(object):
             head_ref = self.llist[0].ref
         except IndexError:
             head_ref = None
-        self.llist = (Node(val, self.i, head_ref), self.llist)
+        self.llist = (Node(val, self.i, head_ref), ) + self.llist
         self.i += 1
         self.size += 1
 
