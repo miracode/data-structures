@@ -26,9 +26,9 @@ class Linked_list(object):
 
     def __init__(self, *args):
         self.size = 0
-        self.llist = (self.insert(arg) for arg in args)
-        #for arg in args:
-        #   self.insert(arg)
+        self.llist = ()
+        for arg in args:
+            self.insert(arg)
 
     def pop(self):
         """Remove first node of linked list"""
@@ -38,7 +38,7 @@ class Linked_list(object):
         """Insert a value to the head of a linked list"""
         try:
             head_ref = self.llist[0].ref
-        except TypeError:
+        except IndexError:
             head_ref = None
         self.llist = (Node(val, self.i, head_ref), self.llist)
         self.i += 1

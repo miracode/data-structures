@@ -23,5 +23,19 @@ class MyTest(unittest.TestCase):
         actual = (tlist.llist[0].val, tlist.llist[0].ref)
         self.assertEquals(expected, actual)
 
+    def test_llist_init(self):
+        """test linked_list initializes to a tuple of nodes"""
+        test_arg = 1
+        tlist = linked_list.Linked_list(test_arg)
+        actual = (tlist.llist[0].val,
+                  tlist.llist[0].ref,
+                  tlist.llist[0].ref_to)
+                  #tlist.llist[1].val,
+                  #tlist.llist[1].ref,
+                  #tlist.llist[1].ref_to)
+        expected = (1, 0, None)
+        self.assertEquals(expected, actual)
+
+
 if __name__ == '__main__':
     unittest.main()
