@@ -49,13 +49,11 @@ class Linked_list(object):
         return self.size
 
     def search(self, val):
-        """Return index of value in linked list"""
-        i = 0
-        for x in self.linked:
-            if x == val:
-                return i
-            i += 1
-            return "Value does not exist in linked list"
+        """Return node containing value in linked list"""
+        for n in self.llist:
+            if n.val == val:
+                return n
+        return None
 
     def remove(self, node):
         """Remove specified node from linked list"""

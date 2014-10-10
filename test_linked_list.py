@@ -41,6 +41,13 @@ class MyTest(unittest.TestCase):
         actual = tlist.size
         self.assertEquals(expected, actual)
 
+    def test_search(self):
+        tlist = linked_list.Linked_list(1, 3, 'a')
+        s_node = tlist.search(3)
+        actual = (s_node.val, s_node.ref, s_node.ref_to)
+        expected = (3, 1, 0)
+        self.assertEquals(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()
