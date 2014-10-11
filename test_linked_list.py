@@ -1,5 +1,7 @@
 import unittest
 import linked_list
+from StringIO import StringIO
+import sys
 
 
 """ For each method in a class, implement a test verifying that it works"""
@@ -24,9 +26,8 @@ class MyTest(unittest.TestCase):
     def test_llist_init(self):
         """test linked_list initializes to a tuple of nodes"""
         tlist = linked_list.Linked_list(1, 'a')
-        # TODO: add another val
-        actual = tlist.first_n.val
-        expected = 1
+        actual = (tlist.first_n.val, tlist.first_n.ref_to.val)
+        expected = (1, 'a')
         self.assertEquals(expected, actual)
 
     def test_size(self):
@@ -50,6 +51,18 @@ class MyTest(unittest.TestCase):
         r_pop = tlist.pop().val
         actual = (r_pop, tlist.first_n.val)
         expected = (1, 3)
+        self.assertEquals(expected, actual)
+
+    def setUp(self):
+        """set up to capture print statement"""
+        self.held, sys.stdout = sys.stdout, StringIO()
+
+    def test_print(self):
+        """test that lprint prints nodes as tuple literal"""
+        tlist = linked_list.Linked_list(1, 'b', 1.0)
+        expected = "(1, 'b', 1.0)"
+        tlist.lprint()
+        actual = sys.stdout.getvalue().strip()  # gets printed val & strips /n
         self.assertEquals(expected, actual)
 
 if __name__ == '__main__':

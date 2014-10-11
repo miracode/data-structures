@@ -63,4 +63,9 @@ class Linked_list(object):
     def lprint(self):
         """Print entire linked list as a tuple literal"""
         # hint use a __ function
-        pass
+        n = self.first_n
+        ll_tuple = ()
+        while n:
+            ll_tuple = ll_tuple + (n.val, )
+            n = n.ref_to
+        print ll_tuple
