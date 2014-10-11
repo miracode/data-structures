@@ -1,16 +1,6 @@
 #!/usr/bin/env python
 
-"""Implement a linked list.
-
-Should support the following methods:
-insert(val)
-pop()
-size()
-search(val)
-remove(node)
-print()
-
-Do not use the Python list type to solve the problem."""
+"""Creates a singly linked list"""
 
 
 class Node(object):
@@ -58,7 +48,18 @@ class Linked_list(object):
 
     def remove(self, node):
         """Remove specified node from linked list"""
-        pass
+        if self.first_n == node:
+            self.first_n = self.first_n.ref_to
+        else:
+            c_node = self.first_n.ref_to
+            prev = self.first_n
+
+            while True:
+                if c_node == node:
+                    prev.ref_to = c_node.ref_to
+                    break
+                prev = c_node
+                c_node = c_node.ref_to
 
     def lprint(self):
         """Print entire linked list as a tuple literal"""

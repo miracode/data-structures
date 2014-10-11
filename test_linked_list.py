@@ -65,5 +65,16 @@ class MyTest(unittest.TestCase):
         actual = sys.stdout.getvalue().strip()  # gets printed val & strips /n
         self.assertEquals(expected, actual)
 
+    def test_remove(self):
+        """test that node is removed"""
+        tlist = linked_list.Linked_list(1, 'node', 40, 1.0, 'apple')
+        tlist.remove(tlist.first_n.ref_to)  # remove 'node' node
+        tlist.remove(tlist.search('apple'))  # rmv last node
+        tlist.remove(tlist.first_n)  # remove first node
+        expected = "(40, 1.0)"
+        tlist.lprint()
+        actual = sys.stdout.getvalue().strip()
+        self.assertEquals(expected, actual)
+
 if __name__ == '__main__':
     unittest.main()
