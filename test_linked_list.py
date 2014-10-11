@@ -40,10 +40,17 @@ class MyTest(unittest.TestCase):
         """test that search returns correct node"""
         tlist = linked_list.Linked_list(1, 3, 'a')
         s_node = tlist.search(3)
-        actual = (s_node.val, s_node.ref, s_node.ref_to)
-        expected = (3, 1, 0)
-        self.assertEquals(expected, actual)
+        actual = (s_node.val)
+        #expected = (3, 1, 0)
+        self.assertEquals(3, actual)
 
+    def test_pop(self):
+        """test that pop returns and removes first node"""
+        tlist = linked_list.Linked_list(1, 3, 5)
+        r_pop = tlist.pop().val
+        actual = (r_pop, tlist.first_n.val)
+        expected = (1, 3)
+        self.assertEquals(expected, actual)
 
 if __name__ == '__main__':
     unittest.main()
