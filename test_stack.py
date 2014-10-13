@@ -3,6 +3,10 @@ import unittest
 
 
 class MyTest(unittest.TestCase):
+    def test_init(self):
+        t_stack = Stack()
+        assert t_stack.first_n is None
+
     def test_push(self):
         """Test that push adds value to top of stack"""
         t_stack = Stack()
