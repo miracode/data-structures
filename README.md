@@ -1,6 +1,12 @@
 data-structures
 ===============
 
+linked_list.py
+create a linked list data structure
+
+stack.py
+create a stack data structure
+
 parentheses.py
 parentheses(text) will return
     1 - if input text has open parentheses (more are open than closed)
