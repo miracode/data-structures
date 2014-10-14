@@ -27,3 +27,14 @@ class Queue:
             dequeue_node = self.first_n
             self.first_n = self.first_n.ref
             return dequeue_node
+
+    def size(self):
+        if (self.first_n.val, self.first_n.ref) == (None, None):
+            return 0
+        else:
+            size_count = 1
+            current = self.first_n
+            while current.ref is not None:
+                size_count += 1
+                current = current.ref
+            return size_count

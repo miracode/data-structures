@@ -42,6 +42,15 @@ class MyTest(unittest.TestCase):
         self.assertEqual(context.exception.message,
                          'Queue is empty, cannot dequeue.')
 
+    def test_size(self):
+        tqueue = queue.Queue()
+        self.assertEquals(tqueue.size(), 0)
+        tqueue.enqueue(1)
+        tqueue.enqueue('a')
+        tqueue.enqueue('bob')
+        tqueue.enqueue(1.0)
+        self.assertEquals(tqueue.size(), 4)
+
 
 if __name__ == '__main__':
     unittest.main()
