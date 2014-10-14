@@ -35,7 +35,12 @@ class MyTest(unittest.TestCase):
         self.assertEquals(actual.val, 1)
         self.assertEquals(tqueue.first_n.val, 'a')
 
-    #def test_null_dequeue(self):
+    def test_null_dequeue(self):
+        tqueue = queue.Queue()
+        with self.assertRaises(IndexError) as context:
+            tqueue.dequeue()
+        self.assertEqual(context.exception.message,
+                         'Queue is empty, cannot dequeue.')
 
 
 if __name__ == '__main__':

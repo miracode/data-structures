@@ -21,6 +21,9 @@ class Queue:
             current.ref = last_node
 
     def dequeue(self):
-        dequeue_node = self.first_n
-        self.first_n = self.first_n.ref
-        return dequeue_node
+        if (self.first_n.val, self.first_n.ref) == (None, None):
+            raise IndexError('Queue is empty, cannot dequeue.')
+        else:
+            dequeue_node = self.first_n
+            self.first_n = self.first_n.ref
+            return dequeue_node
