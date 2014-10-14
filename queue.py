@@ -19,3 +19,8 @@ class Queue:
             last_node = Node()
             last_node.val = val
             current.ref = last_node
+
+    def dequeue(self):
+        dequeue_node = self.first_n
+        self.first_n = self.first_n.ref
+        return dequeue_node

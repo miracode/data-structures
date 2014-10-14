@@ -25,8 +25,17 @@ class MyTest(unittest.TestCase):
         expected = (1, 'a', 'bob', 1.0)
         self.assertEquals(tqueue_vals, expected)
 
+    def test_dequeue(self):
+        tqueue = queue.Queue()
+        tqueue.enqueue(1)
+        tqueue.enqueue('a')
+        tqueue.enqueue('bob')
+        tqueue.enqueue(1.0)
+        actual = tqueue.dequeue()
+        self.assertEquals(actual.val, 1)
+        self.assertEquals(tqueue.first_n.val, 'a')
 
-    #def test_dequeue(self):
+    #def test_null_dequeue(self):
 
 
 if __name__ == '__main__':
