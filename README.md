@@ -7,6 +7,12 @@ create a linked list data structure
 stack.py
 create a stack data structure
 
+queue.py
+create a queue data structure with functions:
+enqueue(value) - add value to the queue
+dequeue() - removes and returns first value in queue
+size() - returns the size of the queue
+
 parentheses.py
 parentheses(text) will return
     1 - if input text has open parentheses (more are open than closed)
