@@ -17,8 +17,17 @@ class MyTest(unittest.TestCase):
         self.assertEquals(act_first_n, expected_n)
         self.assertEquals(act_last_n, expected_n)
 
-    #def def_insert_two(self):
+    #def test_insert_two(self):
     #    val1, val2 = 2, 'a'
     #    test_dll = doubly_ll.Doubly_LL()
     #    test_dll.insert(val1)
     #    test_dll.insert(val2)
+    #    #act_first_n = (test_dll.first_n.data, test_dll.first_n.prev,
+    #    #               test_dll.first_n.next)
+    #    #exp_first_n = ('a', None, test_dll.last_n)
+    #    #self.assertEquals(act_first_n, exp_first_n)
+    #    act_last_n = (test_dll.last_n.data, test_dll.last_n.prev,
+    #                  test_dll.last_n.next)
+    #    exp_last_n = (2, test_dll.first_n, None)
+    #    self.assertEquals(act_last_n, exp_last_n)
+#

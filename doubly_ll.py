@@ -10,13 +10,18 @@ class Node:
 
 class Doubly_LL:
     def __init__(self):
-        self.first_n = Node()
-        self.last_n = Node()
+        self.first_n = None
+        self.last_n = None
 
     def insert(self, val):
-        if (self.first_n.prev, self.first_n.next, self.first_n.data) == (
-                None, None, None):
-            self.first_n.data = val
-            self.last_n = self.first_n
+        if self.first_n is None and self.last_n is None:
+            new_n = Node()
+            new_n.data = val
+            self.first_n = new_n
+            self.last_n = new_n
         #else:
-        #    self.first_n = Node(None, val, self.first_n)
+        #    new_n = Node()
+        #    new_n.data = val
+        #    if self.first_n.next is None:
+        #        self.first_n.
+        #    self.first_n = new_n
