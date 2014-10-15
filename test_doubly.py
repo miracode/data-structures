@@ -94,3 +94,19 @@ class MyTest(unittest.TestCase):
         self.assertEquals(act_first_n, exp_first_n)
         self.assertEquals(act_last_n, exp_last_n)
         self.assertEquals(act_second_n, exp_second_n)
+
+    def test_pop(self):
+        val1, val2, val3 = 1.0, 'a', 2
+        test_dll = doubly_ll.Doubly_LL()
+        with self.assertRaises(IndexError) as context:
+            test_dll.pop()
+        self.assertEqual(context.exception.message,
+                         u"List is emtpy, cannot pop value")
+        test_dll.append(val1)
+        test_dll.append(val2)
+        test_dll.append(val3)
+        actual_pop = test_dll.pop()
+        actual_p_val = actual_pop.data
+        actual_first = test_dll.first_n.data
+        self.assertEquals(actual_p_val, val1)
+        self.assertEquals(actual_first, val2)

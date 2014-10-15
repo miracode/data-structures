@@ -43,3 +43,11 @@ class Doubly_LL:
             if self.last_n.prev is None:
                 self.first_n = self.last_n
             self.last_n = new_n
+
+    def pop(self):
+        if self.first_n is None:
+            raise IndexError(u"List is emtpy, cannot pop value")
+        else:
+            x = self.first_n
+            self.first_n = self.first_n.next
+            return x
