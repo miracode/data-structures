@@ -9,6 +9,16 @@ class MyTest(unittest.TestCase):
         val = 5
         test_dll = doubly_ll.Doubly_LL()
         test_dll.insert(val)
-        self.assertEquals(test_dll.first_n.data, val)
-        self.assertEquals(test_dll.first_n.prev, None)
-        self.assertEquals(test_dll.first_n.next, None)
+        act_first_n = (test_dll.first_n.data, test_dll.first_n.prev,
+                       test_dll.first_n.next)
+        act_last_n = (test_dll.last_n.data, test_dll.last_n.prev,
+                      test_dll.last_n.next)
+        expected_n = (5, None, None)
+        self.assertEquals(act_first_n, expected_n)
+        self.assertEquals(act_last_n, expected_n)
+
+    #def def_insert_two(self):
+    #    val1, val2 = 2, 'a'
+    #    test_dll = doubly_ll.Doubly_LL()
+    #    test_dll.insert(val1)
+    #    test_dll.insert(val2)

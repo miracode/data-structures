@@ -17,5 +17,6 @@ class Doubly_LL:
         if (self.first_n.prev, self.first_n.next, self.first_n.data) == (
                 None, None, None):
             self.first_n.data = val
+            self.last_n = self.first_n
         #else:
         #    self.first_n = Node(None, val, self.first_n)
