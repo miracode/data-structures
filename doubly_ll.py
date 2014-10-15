@@ -19,13 +19,9 @@ class Doubly_LL:
         if self.first_n is None and self.last_n is None:
             self.first_n = new_n
             self.last_n = new_n
-        elif self.first_n.next is None:
-            new_n.next = self.first_n
-            self.first_n.prev = new_n
-            self.last_n = self.first_n
-            self.first_n = new_n
         else:
             new_n.next = self.first_n
             self.first_n.prev = new_n
+            if self.first_n.next is None:
+                self.last_n = self.first_n
             self.first_n = new_n
-
