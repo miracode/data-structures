@@ -33,3 +33,7 @@ class Doubly_LL:
                 self.last_n = self.first_n
             self.first_n = new_n
 
+    def append(self, val):
+        new_n = self.init_node(val)
+        if self.first_n is None and self.last_n is None:
+            self.first_node(new_n)
