@@ -110,3 +110,19 @@ class MyTest(unittest.TestCase):
         actual_first = test_dll.first_n.data
         self.assertEquals(actual_p_val, val1)
         self.assertEquals(actual_first, val2)
+
+    def test_shift(self):
+        val1, val2, val3 = 1.0, 'a', 2
+        test_dll = doubly_ll.Doubly_LL()
+        with self.assertRaises(IndexError) as context:
+            test_dll.shift()
+        self.assertEqual(context.exception.message,
+                         u"List is emtpy, cannot shift value")
+        test_dll.append(val1)
+        test_dll.append(val2)
+        test_dll.append(val3)
+        actual_shift = test_dll.shift()
+        actual_s_val = actual_shift.data
+        actual_last = test_dll.last_n.data
+        self.assertEquals(actual_s_val, val3)
+        self.assertEquals(actual_last, val2)

@@ -51,3 +51,11 @@ class Doubly_LL:
             x = self.first_n
             self.first_n = self.first_n.next
             return x
+
+    def shift(self):
+        if self.first_n is None:
+            raise IndexError(u"List is emtpy, cannot shift value")
+        else:
+            x = self.last_n
+            self.last_n = self.last_n.prev
+            return x
