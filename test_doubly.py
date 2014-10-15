@@ -126,3 +126,11 @@ class MyTest(unittest.TestCase):
         actual_last = test_dll.last_n.data
         self.assertEquals(actual_s_val, val3)
         self.assertEquals(actual_last, val2)
+
+    def test_remove(self):
+        val1, val2, val3, val4 = 1.0, 'a', 2, 'a'
+        test_dll = doubly_ll.Doubly_LL()
+        with self.assertRaises(IndexError) as context:
+            test_dll.remove('a')
+        self.assertEqual(context.exception.message,
+                         u"List is emtpy, cannot remove value")
