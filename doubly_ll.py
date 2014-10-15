@@ -70,3 +70,9 @@ class Doubly_LL:
         """Removes first node from the list with value"""
         if self.first_n is None:
             raise IndexError(u"List is emtpy, cannot remove value")
+        current = self.first_n
+        while current.data != val:
+            current = current.next
+            if current is None:
+                raise ValueError(u"Value not in list")
+

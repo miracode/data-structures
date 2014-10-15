@@ -134,3 +134,10 @@ class MyTest(unittest.TestCase):
             test_dll.remove('a')
         self.assertEqual(context.exception.message,
                          u"List is emtpy, cannot remove value")
+        test_dll.append(val1)
+        test_dll.append(val2)
+        test_dll.append(val3)
+        test_dll.append(val4)
+        with self.assertRaises(ValueError) as context:
+            test_dll.remove('b')
+        self.assertEqual(context.exception.message, u"Value not in list")
