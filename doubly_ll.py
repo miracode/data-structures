@@ -37,3 +37,9 @@ class Doubly_LL:
         new_n = self.init_node(val)
         if self.first_n is None and self.last_n is None:
             self.first_node(new_n)
+        else:
+            new_n.prev = self.last_n
+            self.last_n.next = new_n
+            if self.last_n.prev is None:
+                self.first_n = self.last_n
+            self.last_n = new_n
