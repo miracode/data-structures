@@ -75,4 +75,10 @@ class Doubly_LL:
             current = current.next
             if current is None:
                 raise ValueError(u"Value not in list")
-
+        if current.prev is None:
+            self.first_n = self.first_n.next
+        elif current.next is None:
+            self.last_n = self.last_n.prev
+        else:
+            current.prev.next = current.next
+            current.next.prev = current.prev

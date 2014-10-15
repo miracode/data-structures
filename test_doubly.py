@@ -128,7 +128,7 @@ class MyTest(unittest.TestCase):
         self.assertEquals(actual_last, val2)
 
     def test_remove(self):
-        val1, val2, val3, val4 = 1.0, 'a', 2, 'a'
+        val1, val2, val3, val4, val5 = 1.0, 'a', 2, 'a', 5
         test_dll = doubly_ll.Doubly_LL()
         with self.assertRaises(IndexError) as context:
             test_dll.remove('a')
@@ -138,6 +138,20 @@ class MyTest(unittest.TestCase):
         test_dll.append(val2)
         test_dll.append(val3)
         test_dll.append(val4)
+        test_dll.append(val5)
         with self.assertRaises(ValueError) as context:
             test_dll.remove('b')
         self.assertEqual(context.exception.message, u"Value not in list")
+        test_dll.remove('a')
+        act_list = (test_dll.first_n.data, test_dll.first_n.next.data,
+                    test_dll.first_n.next.next.data,
+                    test_dll.first_n.next.next.next.data)
+        exp_list = (1.0, 2, 'a', 5)
+        self.assertEquals(act_list, exp_list)
+        test_dll.remove(5)
+        act_list2 = (test_dll.first_n.data, test_dll.first_n.next.data,
+                     test_dll.first_n.next.next.data)
+        self.assertEquals(act_list2, (1.0, 2, 'a'))
+        test_dll.remove(1.0)
+        act_list3 = (test_dll.first_n.data, test_dll.first_n.next.data)
+        self.assertEquals(act_list3, (2, 'a'))
