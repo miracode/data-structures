@@ -38,11 +38,11 @@ class MyTest(unittest.TestCase):
         test_dll.insert(val2)
         test_dll.insert(val3)
         act_first_n = (test_dll.first_n.data, test_dll.first_n.prev,
-                        test_dll.first_n.next)
+                       test_dll.first_n.next)
         act_last_n = (test_dll.last_n.data, test_dll.last_n.prev,
                       test_dll.last_n.next)
         act_second_n = (test_dll.first_n.next.data, test_dll.first_n.next.prev,
-                    test_dll.first_n.next.next)
+                        test_dll.first_n.next.next)
         exp_first_n = (1.0, None, test_dll.last_n.prev)
         exp_last_n = (2, test_dll.first_n.next, None)
         exp_second_n = ('a', test_dll.first_n, test_dll.last_n)
@@ -50,4 +50,14 @@ class MyTest(unittest.TestCase):
         self.assertEquals(act_last_n, exp_last_n)
         self.assertEquals(act_second_n, exp_second_n)
 
-
+    def test_append_one(self):
+        test_dll = doubly_ll.Doubly_LL()
+        val = 'p'
+        test_dll.append(val)
+        act_first_n = (test_dll.first_n.data, test_dll.first_n.prev,
+                       test_dll.first_n.next)
+        act_last_n = (test_dll.last_n.data, test_dll.last_n.prev,
+                      test_dll.last_n.next)
+        expected_n = ('p', None, None)
+        self.assertEquals(act_first_n, expected_n)
+        self.assertEquals(act_last_n, expected_n)
