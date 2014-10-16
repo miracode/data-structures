@@ -38,13 +38,13 @@ class MyTest(unittest.TestCase):
         expected = 7
         self.assertEquals(actual, expected)
 
-    #def test_pop_mheap_array(self):
-    #    tarray = (3, 7, 1, 4, 5, 2, 9)
-    #    test_mh = binary_heap.MaxBinaryHeap(tarray)
-    #    test_mh.pop()
-    #    actual = test_mh.h_array
-    #    expected = [None, 7, 5, 2, 3, 4, 1]
-    #    self.assertEquals(actual, expected)
+    def test_pop_mheap_array(self):
+        tarray = (3, 7, 1, 4, 5, 2, 9)
+        test_mh = binary_heap.MaxBinaryHeap(tarray)
+        test_mh.mh_pop()
+        actual = test_mh.h_array
+        expected = [None, 7, 5, 2, 3, 4, 1]
+        self.assertEquals(actual, expected)
 
 if __name__ == '__main__':
     unittest.main()
