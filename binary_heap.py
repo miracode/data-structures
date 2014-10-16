@@ -32,18 +32,26 @@ class MaxBinaryHeap:
         popval = self.harray[1]
         # replace root with last element
         self.harray[1] = self.harray.pop()
+        # reduce length
+        self.length -= 1
         #compare to children
         index = 1
-        largest = index
-        left = 2 * largest
-        right = 2 * largest + 1
-        if left <= self.length and self.harray[left] > self.harray[largest]:
-            largest = left
-        if right <= self.length and self.harray[right] > \
-                self.harray[largest]:
-            largest = right
-        if largest != index:
-            self.harray[largest], self.harray[index] = \
-                self.harray[index], self.harray[largest]
+        while True:
+            largest = index
+            left = 2 * largest
+            right = 2 * largest + 1
+            if left <= self.length and self.harray[left] > \
+                    self.harray[largest]:
+                largest = left
+            if right <= self.length and self.harray[right] > \
+                    self.harray[largest]:
+                largest = right
+            if largest != index:
+                newindex = largest
+                self.harray[largest], self.harray[index] = \
+                    self.harray[index], self.harray[largest]
+                index = newindex
+            else:
+                break
 
         return popval

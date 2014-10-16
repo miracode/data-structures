@@ -46,5 +46,20 @@ class MyTest(unittest.TestCase):
         expected = [None, 7, 5, 2, 3, 4, 1]
         self.assertEquals(actual, expected)
 
+    def test_max_heap_length(self):
+        tarray = (3, 7, 1, 4, 5, 2, 9)
+        tmaxheap = binary_heap.MaxBinaryHeap(tarray)
+        actual = tmaxheap.length
+        expected = 7
+        self.assertEquals(actual, expected)
+
+    def test_pop_max_heap_array2(self):
+        tarray = (22, 7, 10, 45, 15, 27, 52, 12)
+        tmaxheap = binary_heap.MaxBinaryHeap(tarray)
+        tmaxheap.mh_pop()
+        actual = tmaxheap.harray
+        expected = [None, 45, 22, 27, 12, 15, 10, 7]
+        self.assertEquals(actual, expected)
+
 if __name__ == '__main__':
     unittest.main()
