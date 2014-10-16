@@ -2,8 +2,12 @@
 
 
 class MaxBinaryHeap:
-    def __init__(self, h_array=[None]):
-        self.h_array = h_array
+
+    def __init__(self, in_array=None):
+        self.h_array = [None]
+        #if in_array is not None:
+        #    for val in in_array:
+
 
     def insert(self, val):
         # insert val to end of list

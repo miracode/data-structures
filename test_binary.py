@@ -15,7 +15,9 @@ class MyTest(unittest.TestCase):
     def test_mheap_insert_many(self):
         vals = [3, 7, 1, 4]
         test_mh2 = binary_heap.MaxBinaryHeap()
+        print test_mh2.h_array
         for val in vals:
+            print val
             test_mh2.insert(val)
         actual = test_mh2.h_array
         expected = [None, 7, 4, 1, 3]
