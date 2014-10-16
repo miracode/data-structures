@@ -3,47 +3,47 @@
 
 class MaxBinaryHeap:
 
-    def __init__(self, in_array=None):
-        self.h_array = [None]
+    def __init__(self, iterable=None):
+        self.harray = [None]
         self.length = 0
-        if in_array is not None:
-            for val in in_array:
+        if iterable is not None:
+            for val in iterable:
                 self.mh_insert(val)
 
     def mh_insert(self, val):
         # insert val to end of list
-        self.h_array.append(val)
+        self.harray.append(val)
         # compare to parent
-        val_index = self.h_array.index(val)
-        parent_index = val_index / 2
+        vindex = self.harray.index(val)
+        parent = vindex / 2
         # swap if not in right order
-        while self.h_array[parent_index] < self.h_array[val_index]:
-            if self.h_array[parent_index] is None:
+        while self.harray[parent] < self.harray[vindex]:
+            if self.harray[parent] is None:
                 break
             else:
-                self.h_array[parent_index], self.h_array[val_index] = \
-                    self.h_array[val_index], self.h_array[parent_index]
-                val_index = parent_index
-                parent_index = val_index / 2
+                self.harray[parent], self.harray[vindex] = \
+                    self.harray[vindex], self.harray[parent]
+                vindex = parent
+                parent = vindex / 2
         # increase length by 1
         self.length += 1
 
     def mh_pop(self):
-        p_val = self.h_array[1]
+        popval = self.harray[1]
         # replace root with last element
-        self.h_array[1] = self.h_array.pop()
+        self.harray[1] = self.harray.pop()
         #compare to children
         index = 1
         largest = index
         left = 2 * largest
         right = 2 * largest + 1
-        if left <= self.length and self.h_array[left] > self.h_array[largest]:
+        if left <= self.length and self.harray[left] > self.harray[largest]:
             largest = left
-        if right <= self.length and self.h_array[right] > \
-                self.h_array[largest]:
+        if right <= self.length and self.harray[right] > \
+                self.harray[largest]:
             largest = right
         if largest != index:
-            self.h_array[largest], self.h_array[index] = \
-                self.h_array[index], self.h_array[largest]
+            self.harray[largest], self.harray[index] = \
+                self.harray[index], self.harray[largest]
 
-        return p_val
+        return popval
