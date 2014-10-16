@@ -6,4 +6,16 @@ class MaxBinaryHeap:
         self.h_array = h_array
 
     def insert(self, val):
-        self.h_array = self.h_array + [val]
+        # insert val to end of list
+        self.h_array.append(val)
+        # compare to parent
+        val_index = self.h_array.index(val)
+        parent_index = val_index / 2
+        while self.h_array[parent_index] < self.h_array[val_index]:
+            if self.h_array[parent_index] is None:
+                break
+            else:
+                self.h_array[parent_index], self.h_array[val_index] = \
+                    self.h_array[val_index], self.h_array[parent_index]
+                val_index = parent_index
+                parent_index = val_index / 2
