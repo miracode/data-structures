@@ -5,11 +5,12 @@ class MaxBinaryHeap:
 
     def __init__(self, in_array=None):
         self.h_array = [None]
-        #if in_array is not None:
-        #    for val in in_array:
+        if in_array is not None:
+            for val in in_array:
+                self.mh_insert(val)
 
 
-    def insert(self, val):
+    def mh_insert(self, val):
         # insert val to end of list
         self.h_array.append(val)
         # compare to parent
