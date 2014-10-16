@@ -28,3 +28,9 @@ create a max binary heap with functions:
 - insert(value) - add a value to the binary heap
 - pop() - remove and return root value of binary heap
   - (Pop algorithm logic from [Wikipedia - Binary Heap - Max-Heapify](http://en.wikipedia.org/wiki/Binary_heap#Delete))
+
+priorityq.py  
+create a priority queue where lowest number has highest priority  
+- insert(value, priority) - add value to queue
+- pop() - returns and removes highest priority value in queue
+- peek() - returns highest priority value without removing
