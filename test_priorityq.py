@@ -48,11 +48,11 @@ class MyTest(unittest.TestCase):
         testq.insert(pri5, val5)
         testq.insert(pri6, val6)
         expected = [[None],
-                [pri3, val3],
-                [pri5, val5],
-                [pri1, val1, val4],
-                [pri2, val2],
-                [pri4, val4]]
+                    [pri3, val3],
+                    [pri6, val6],
+                    [pri1, val1, val4],
+                    [pri2, val2],
+                    [pri5, val5]]
         actual = testq.harray
         self.assertEquals(expected, actual)
 
