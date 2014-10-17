@@ -68,6 +68,23 @@ class BinaryHeap:
                     index = newindex
                 else:
                     break
-            #elif self.btype == 'min':
+        elif self.btype == 'min':
+            while True:
+                smallest = index
+                left = 2 * smallest
+                right = 2 * smallest + 1
+                if left <= self.length and self.harray[left] < \
+                        self.harray[smallest]:
+                    smallest = left
+                if right <= self.length and self.harray[right] < \
+                        self.harray[smallest]:
+                    smallest = right
+                if smallest != index:
+                    newindex = smallest
+                    self.harray[smallest], self.harray[index] = \
+                        self.harray[index], self.harray[smallest]
+                    index = newindex
+                else:
+                    break
 
         return popval

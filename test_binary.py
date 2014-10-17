@@ -96,6 +96,24 @@ class MyTest(unittest.TestCase):
         expected = [None, 1, 4, 3, 7]
         self.assertEquals(actual, expected)
 
+    def test_val_list(self):
+        vals = [3, 7, 1, 4]
+        theap = binary_heap.BinaryHeap(vals, 'min')
+        actual = theap.harray
+        expected = [None, 1, 4, 3, 7]
+        self.assertEquals(actual, expected)
+
+
+    def test_min_pop(self):
+        vals = [3, 7, 1, 4]
+        theap = binary_heap.BinaryHeap(vals, 'min')
+        actual_pval = theap.mh_pop()
+        actual_array = theap.harray
+        expected_pval = 1
+        expectd_array = [None, 3, 4, 7]
+        self.assertEquals(actual_pval, expected_pval)
+        self.assertEquals(actual_array, expectd_array)
+
 
 if __name__ == '__main__':
     unittest.main()
