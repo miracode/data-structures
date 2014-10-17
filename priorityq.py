@@ -35,3 +35,6 @@ class PriorityQ(object):
                         self.harray[vindex], self.harray[pindex]
                     vindex = pindex
                     pindex = vindex / 2
+
+    def pop(self):
+        pass
