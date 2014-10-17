@@ -86,6 +86,16 @@ class MyTest(unittest.TestCase):
         self.assertEquals(actual.exception.message,
                           u"Binary Heap type must be 'max' or 'min'")
 
+    def test_min_insert(self):
+        theap = binary_heap.BinaryHeap(btype='min')
+        vals = [3, 7, 1, 4]
+        for val in vals:
+            print val
+            theap.mh_insert(val)
+        actual = theap.harray
+        expected = [None, 1, 4, 3, 7]
+        self.assertEquals(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()

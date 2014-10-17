@@ -30,6 +30,15 @@ class BinaryHeap:
                         self.harray[vindex], self.harray[parent]
                     vindex = parent
                     parent = vindex / 2
+        elif self.btype == 'min':
+            while self.harray[parent] > self.harray[vindex]:
+                if self.harray[parent] is None:
+                    break
+                else:
+                    self.harray[parent], self.harray[vindex] = \
+                        self.harray[vindex], self.harray[parent]
+                    vindex = parent
+                    parent = vindex / 2
         # increase length by 1
         self.length += 1
 
@@ -41,22 +50,24 @@ class BinaryHeap:
         self.length -= 1
         #compare to children
         index = 1
-        while True:
-            largest = index
-            left = 2 * largest
-            right = 2 * largest + 1
-            if left <= self.length and self.harray[left] > \
-                    self.harray[largest]:
-                largest = left
-            if right <= self.length and self.harray[right] > \
-                    self.harray[largest]:
-                largest = right
-            if largest != index:
-                newindex = largest
-                self.harray[largest], self.harray[index] = \
-                    self.harray[index], self.harray[largest]
-                index = newindex
-            else:
-                break
+        if self.btype == 'max':
+            while True:
+                largest = index
+                left = 2 * largest
+                right = 2 * largest + 1
+                if left <= self.length and self.harray[left] > \
+                        self.harray[largest]:
+                    largest = left
+                if right <= self.length and self.harray[right] > \
+                        self.harray[largest]:
+                    largest = right
+                if largest != index:
+                    newindex = largest
+                    self.harray[largest], self.harray[index] = \
+                        self.harray[index], self.harray[largest]
+                    index = newindex
+                else:
+                    break
+            #elif self.btype == 'min':
 
         return popval
