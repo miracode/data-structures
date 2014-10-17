@@ -24,7 +24,7 @@ parentheses(text) will return
 
 
 binary_heap.py  
-create a max binary heap with functions:  
+create a max or min binary heap with functions:  
 - insert(value) - add a value to the binary heap
 - pop() - remove and return root value of binary heap
   - (Pop algorithm logic from [Wikipedia - Binary Heap - Max-Heapify](http://en.wikipedia.org/wiki/Binary_heap#Delete))

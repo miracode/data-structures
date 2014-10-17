@@ -12,9 +12,9 @@ class BinaryHeap:
             raise ValueError(u"Binary Heap type must be 'max' or 'min'")
         if self.iterable is not ():
             for val in self.iterable:
-                self.mh_insert(val)
+                self.insert(val)
 
-    def mh_insert(self, val):
+    def insert(self, val):
         # insert val to end of list
         self.harray.append(val)
         # compare to parent
@@ -42,7 +42,7 @@ class BinaryHeap:
         # increase length by 1
         self.length += 1
 
-    def mh_pop(self):
+    def pop(self):
         popval = self.harray[1]
         # replace root with last element
         self.harray[1] = self.harray.pop()

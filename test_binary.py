@@ -10,7 +10,7 @@ class MyTest(unittest.TestCase):
     def test_max_heap_insert1(self):
         tmaxheap = binary_heap.BinaryHeap()
         val = 2
-        tmaxheap.mh_insert(val)
+        tmaxheap.insert(val)
         self.assertEquals(tmaxheap.harray, [None, val])
 
     def test_max_heap_insert_many(self):
@@ -19,7 +19,7 @@ class MyTest(unittest.TestCase):
         print tmaxheap.harray
         for val in vals:
             print val
-            tmaxheap.mh_insert(val)
+            tmaxheap.insert(val)
         actual = tmaxheap.harray
         expected = [None, 7, 4, 1, 3]
         self.assertEquals(actual, expected)
@@ -34,14 +34,14 @@ class MyTest(unittest.TestCase):
     def test_pop_max_heap_val(self):
         tarray = (3, 7, 1, 4)
         tmaxheap = binary_heap.BinaryHeap(tarray)
-        actual = tmaxheap.mh_pop()
+        actual = tmaxheap.pop()
         expected = 7
         self.assertEquals(actual, expected)
 
     def test_pop_max_heap_array(self):
         tarray = (3, 7, 1, 4, 5, 2, 9)
         tmaxheap = binary_heap.BinaryHeap(tarray)
-        tmaxheap.mh_pop()
+        tmaxheap.pop()
         actual = tmaxheap.harray
         expected = [None, 7, 5, 2, 3, 4, 1]
         self.assertEquals(actual, expected)
@@ -56,7 +56,7 @@ class MyTest(unittest.TestCase):
     def test_pop_max_heap_array2(self):
         tarray = (22, 7, 10, 45, 15, 27, 52, 12)
         tmaxheap = binary_heap.BinaryHeap(tarray)
-        tmaxheap.mh_pop()
+        tmaxheap.pop()
         actual = tmaxheap.harray
         expected = [None, 45, 22, 27, 12, 15, 10, 7]
         self.assertEquals(actual, expected)
@@ -91,7 +91,7 @@ class MyTest(unittest.TestCase):
         vals = [3, 7, 1, 4]
         for val in vals:
             print val
-            theap.mh_insert(val)
+            theap.insert(val)
         actual = theap.harray
         expected = [None, 1, 4, 3, 7]
         self.assertEquals(actual, expected)
@@ -103,11 +103,10 @@ class MyTest(unittest.TestCase):
         expected = [None, 1, 4, 3, 7]
         self.assertEquals(actual, expected)
 
-
     def test_min_pop(self):
         vals = [3, 7, 1, 4]
         theap = binary_heap.BinaryHeap(vals, 'min')
-        actual_pval = theap.mh_pop()
+        actual_pval = theap.pop()
         actual_array = theap.harray
         expected_pval = 1
         expectd_array = [None, 3, 4, 7]
