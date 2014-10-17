@@ -17,7 +17,7 @@ class BinaryHeap:
         # insert val to end of list
         self.harray.append(val)
         # compare to parent
-        vindex = self.harray.index(val)
+        vindex = len(self.harray) - 1
         parent = vindex / 2
         # swap if not in right order
         if self.btype == 'max':

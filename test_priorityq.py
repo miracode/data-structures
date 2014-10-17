@@ -6,11 +6,11 @@ class MyTest(unittest.TestCase):
 
     def test_insert_one(self):
         pass
-        val, pri = 'a', 2
+        pri, val = 2, 'a'
         testq = priorityq.PriorityQ()
-        testq.insert(val, pri)
-        expected = testq.heap
-        actual = [(val, pri)]
+        testq.insert(pri, val)
+        expected = testq.harray
+        actual = [[pri, val]]
         self.assertEquals(expected, actual)
 
 
