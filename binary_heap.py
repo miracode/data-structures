@@ -10,6 +10,8 @@ class MaxBinaryHeap:
             for val in iterable:
                 self.mh_insert(val)
         self.btype = btype
+        if self.btype not in ['min', 'max']:
+            raise ValueError(u"Binary Heap type must be 'max' or 'min'")
 
     def mh_insert(self, val):
         # insert val to end of list

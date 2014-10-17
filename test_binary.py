@@ -67,16 +67,24 @@ class MyTest(unittest.TestCase):
         expected = 'max'
         self.assertEquals(actual, expected)
 
-    #def test_min_max_error(self):
-    #    theap = binary_heap.MaxBinaryHeap()
-    #    actual = theap.btype
-    #    expected = 'max'
-    #    self.assertEquals(actual, expected)
-        #tarray = (3, 7, 1, 4, 5, 2, 9)
-        #theap2 = binary_heap.MaxBinaryHeap(tarray)
-        #actual = theap2.btype
-        #expected = 'max'
-        #self.assertEquals(actual, expected)
+    def test_min_max_error(self):
+        theap = binary_heap.MaxBinaryHeap()
+        actual = theap.btype
+        expected = 'max'
+        self.assertEquals(actual, expected)
+        tarray = (3, 7, 1, 4, 5, 2, 9)
+        theap2 = binary_heap.MaxBinaryHeap(tarray)
+        actual = theap2.btype
+        expected = 'max'
+        self.assertEquals(actual, expected)
+        theap3 = binary_heap.MaxBinaryHeap(btype='min')
+        actual = (theap3.harray, theap3.btype)
+        expected = ([None], 'min')
+        self.assertEquals(actual, expected)
+        with self.assertRaises(ValueError) as actual:
+            binary_heap.MaxBinaryHeap(btype='foo')
+        self.assertEquals(actual.exception.message,
+                          u"Binary Heap type must be 'max' or 'min'")
 
 
 if __name__ == '__main__':
