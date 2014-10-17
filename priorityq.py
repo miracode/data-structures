@@ -39,7 +39,7 @@ class PriorityQ(object):
 
     def pop(self):
         popval = self.harray[1][1]
-        # if there are multiple values with the same priority, 
+        # if there are multiple values with the same priority,
         # pop from priority list
         if len(self.harray[1]) > 2:
             self.harray[1].remove(popval)
@@ -66,3 +66,6 @@ class PriorityQ(object):
                     break
         return popval
 
+    def peek(self):
+        peekval = self.harray[1][1]
+        return peekval
