@@ -9,17 +9,16 @@ Values with same priority will be returned in order of queueing
 class PriorityQ(object):
 
     def __init__(self):
-        self.harray = []
+        self.harray = [[None]]
 
     def insert(self, priority, value):
         # if priority already in heap, add value to end of priority's list
         found = False
-        if self.harray != []:
-            for val in self.harray:
-                if val[0] == priority:
-                    found = True
-                    val.append(value)
-                    break
+        for val in self.harray:
+            if val[0] == priority:
+                found = True
+                val.append(value)
+                break
         if not found:
             # insert to end of list
             self.harray.append([priority, value])
@@ -28,7 +27,7 @@ class PriorityQ(object):
             pindex = vindex / 2
             # compare priority with parent priority
             while self.harray[pindex][0] > self.harray[vindex][0]:
-                if self.harray[pindex][0]is None:
+                if self.harray[pindex][0] is None:
                     break
                 else:
                     # swap when not in right order
