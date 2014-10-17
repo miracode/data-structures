@@ -37,8 +37,14 @@ class PriorityQ(object):
                     vindex = pindex
                     pindex = vindex / 2
 
+    def peek(self):
+        """Return highest priority value without removing from queue"""
+        peekval = self.harray[1][1]
+        return peekval
+
     def pop(self):
-        popval = self.harray[1][1]
+        """Return highest priority value and remove from queue"""
+        popval = self.peek()
         # if there are multiple values with the same priority,
         # pop from priority list
         if len(self.harray[1]) > 2:
@@ -65,7 +71,3 @@ class PriorityQ(object):
                 else:
                     break
         return popval
-
-    def peek(self):
-        peekval = self.harray[1][1]
-        return peekval
