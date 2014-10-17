@@ -5,6 +5,10 @@ Priority queue handles lower numbers as higher priority
 Values with same priority will be returned in order of queueing
 """
 
-class PriorityQ:
+#from binary_heap import BinaryHeap
+
+class PriorityQ(object):
     def __init__(self):
-        self.heap = []
+        self.harray = [None]
+        self.length = 0
+        
