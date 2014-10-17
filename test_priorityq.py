@@ -56,21 +56,21 @@ class MyTest(unittest.TestCase):
         actual = testq.harray
         self.assertEquals(expected, actual)
 
-    #def test_pop_with_1_elem(self):
-    #    pri1, val1 = 2, 'a'
-    #    pri2, val2 = 5, 'b'
-    #    pri3, val3 = 1, 'c'
-    #    pri4, val4 = 4, 'd'
-    #    pri5, val5 = 3, 'e'
-    #    testq = PriorityQ()
-    #    testq.insert(pri1, val1)
-    #    testq.insert(pri2, val2)
-    #    testq.insert(pri3, val3)
-    #    testq.insert(pri4, val4)
-    #    testq.insert(pri5, val5)
-    #    x = testq.pop()
-    #    self.assertEquals(x, 57)
-#
+    def test_pop_with_1_elem(self):
+        pri1, val1 = 2, 'a'
+        pri2, val2 = 5, 'b'
+        pri3, val3 = 1, 'c'
+        pri4, val4 = 4, 'd'
+        pri5, val5 = 3, 'e'
+        testq = PriorityQ()
+        testq.insert(pri1, val1)
+        testq.insert(pri2, val2)
+        testq.insert(pri3, val3)
+        testq.insert(pri4, val4)
+        testq.insert(pri5, val5)
+        x = testq.pop()
+        self.assertEquals(x, 'c')
+
 
 
 if __name__ == '__main__':
