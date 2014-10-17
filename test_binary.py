@@ -61,5 +61,23 @@ class MyTest(unittest.TestCase):
         expected = [None, 45, 22, 27, 12, 15, 10, 7]
         self.assertEquals(actual, expected)
 
+    def test_btype_init(self):
+        theap = binary_heap.MaxBinaryHeap()
+        actual = theap.btype
+        expected = 'max'
+        self.assertEquals(actual, expected)
+
+    #def test_min_max_error(self):
+    #    theap = binary_heap.MaxBinaryHeap()
+    #    actual = theap.btype
+    #    expected = 'max'
+    #    self.assertEquals(actual, expected)
+        #tarray = (3, 7, 1, 4, 5, 2, 9)
+        #theap2 = binary_heap.MaxBinaryHeap(tarray)
+        #actual = theap2.btype
+        #expected = 'max'
+        #self.assertEquals(actual, expected)
+
+
 if __name__ == '__main__':
     unittest.main()

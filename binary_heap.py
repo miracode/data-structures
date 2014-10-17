@@ -3,12 +3,13 @@
 
 class MaxBinaryHeap:
 
-    def __init__(self, iterable=None):
+    def __init__(self, iterable=None, btype='max'):
         self.harray = [None]
         self.length = 0
         if iterable is not None:
             for val in iterable:
                 self.mh_insert(val)
+        self.btype = btype
 
     def mh_insert(self, val):
         # insert val to end of list
