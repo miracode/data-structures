@@ -90,3 +90,18 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(actual_true, True)
         self.assertEquals(actual_false, False)
 
+    def test_size(self):
+        vals1 = [12, 9, 14]
+        vals2 = [12, 2, 7, 14, 9]
+        test_bst1 = bst.BinarySearchTree()
+        test_bst2 = bst.BinarySearchTree()
+        for val in vals1:
+            test_bst1.insert(val)
+        for val in vals2:
+            test_bst2.insert(val)
+        actual1 = test_bst1.size()
+        actual2 = test_bst2.size()
+        self.assertEquals(actual1, 3)
+        self.assertEquals(actual2, 5)
+
+

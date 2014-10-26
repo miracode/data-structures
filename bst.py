@@ -42,7 +42,25 @@ class BinarySearchTree(object):
             return False
 
     def size(self):
-        pass
+        count = 0
+        # count current value
+        if self.value is None:
+            count += 0
+        else:
+            count += 1
+        # count left side
+        if self.left is None:
+            count += 0
+        else:
+            count += self.left.size()
+        # count right side
+        if self.right is None:
+            count += 0
+        else:
+            count += self.right.size()
+
+        return count
+
 
     def depth(self):
         pass
