@@ -55,3 +55,17 @@ class BSTTest(unittest.TestCase):
         actual3 = (test_bst.left.left.value, test_bst.left.left.left,
                    test_bst.left.left.right)
         self.assertEquals(expected3, actual3)
+
+    def test_insert_many(self):
+        vals = [12, 2, 7, 14, 9]
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            test_bst.insert(val)
+        expected = (12, 2, None, 7, 9, None, None, 14, None, None)
+        actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
+                  test_bst.left.right.value, test_bst.left.right.right.value,
+                  test_bst.left.right.right.left,
+                  test_bst.left.right.right.right,
+                  test_bst.right.value, test_bst.right.left,
+                  test_bst.right.right)
+        self.assertEquals(actual, expected)
