@@ -23,7 +23,23 @@ class BinarySearchTree(object):
                 self.right.insert(val)
 
     def contains(self, val):
-        pass
+        print self.value, val
+        if self.value is None:
+            return False
+        elif val == self.value:
+            return True
+        elif val < self.value:
+            if self.left is None:
+                return False
+            else:
+                return self.left.contains(val)
+        elif val > self.value:
+            if self.right is None:
+                return False
+            else:
+                return self.right.contains(val)
+        else:
+            return False
 
     def size(self):
         pass

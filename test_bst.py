@@ -69,3 +69,24 @@ class BSTTest(unittest.TestCase):
                   test_bst.right.value, test_bst.right.left,
                   test_bst.right.right)
         self.assertEquals(actual, expected)
+
+    def test_contain_small_tree(self):
+        vals = [12, 9, 14]
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            test_bst.insert(val)
+        actual_true = test_bst.contains(9)
+        actual_false = test_bst.contains(1)
+        self.assertEquals(actual_true, True)
+        self.assertEquals(actual_false, False)
+
+    def test_contain_big_tree(self):
+        vals = [12, 2, 7, 14, 9]
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            test_bst.insert(val)
+        actual_true = test_bst.contains(9)
+        actual_false = test_bst.contains(1)
+        self.assertEquals(actual_true, True)
+        self.assertEquals(actual_false, False)
+
