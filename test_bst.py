@@ -120,5 +120,19 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(actual1, expected1)
         self.assertEquals(actual2, expected2)
 
+    def test_balance_even(self):
+        vals1 = [12, 9, 14]
+        test_bst1 = bst.BinarySearchTree()
+        for val in vals1:
+            test_bst1.insert(val)
+        bal = test_bst1.balance()
+        self.assertEquals(bal, 0)
+        more_vals = [10, 2, 13, 17]
+        for val in more_vals:
+            test_bst1.insert(val)
+        bal = test_bst1.balance()
+        self.assertEquals(bal, 0)
+
+
 
 
