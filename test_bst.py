@@ -133,6 +133,27 @@ class BSTTest(unittest.TestCase):
         bal = test_bst1.balance()
         self.assertEquals(bal, 0)
 
+    def test_unbalanced(self):
+        vals = [12, 9]
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            test_bst.insert(val)
+        bal = test_bst.balance()
+        self.assertEquals(bal, -1)
+        test_bst.insert(5)
+        bal = test_bst.balance()
+        self.assertEquals(bal, -2)
+        vals = [15, 23, 50]
+        for val in vals:
+            test_bst.insert(val)
+        bal = test_bst.balance()
+        self.assertEquals(bal, 1)
+        test_bst2 = bst.BinarySearchTree()
+        for val in vals:
+            test_bst2.insert(val)
+        bal = test_bst2.balance()
+        self.assertEquals(bal, 2)
+
 
 
 

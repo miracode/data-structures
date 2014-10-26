@@ -74,21 +74,14 @@ class BinarySearchTree(object):
         return count
 
     def balance(self):
-        count = 0
         count_left = 0
         count_right = 0
         # current value
         if self.value:
-            # left node
             if self.left:
-                count_left += self.left.balance()
+                count_left += (1 - self.left.balance())
             # right node
             if self.right:
-                count_right += self.right.balance()
+                count_right += 1 + self.right.balance()
         diff = count_right - count_left
-        count += diff
-        return count
-
-        count_max = max(count_left, count_right)
-        count += count_max
-        return count
+        return diff
