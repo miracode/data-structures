@@ -104,4 +104,21 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(actual1, 3)
         self.assertEquals(actual2, 5)
 
+    def test_depth(self):
+        vals1 = [12, 9, 14]
+        vals2 = [12, 2, 7, 14, 9]
+        test_bst1 = bst.BinarySearchTree()
+        test_bst2 = bst.BinarySearchTree()
+        for val in vals1:
+            test_bst1.insert(val)
+        for val in vals2:
+            test_bst2.insert(val)
+        expected1 = 2
+        expected2 = 4
+        actual1 = test_bst1.depth()
+        actual2 = test_bst2.depth()
+        self.assertEquals(actual1, expected1)
+        self.assertEquals(actual2, expected2)
+
+
 
