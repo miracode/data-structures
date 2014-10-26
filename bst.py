@@ -1,10 +1,4 @@
 """Binary Search Tree"""
-class BinaryNode(object):
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
-
 
 class BinarySearchTree(object):
     def __init__(self):
@@ -13,13 +7,15 @@ class BinarySearchTree(object):
         self.right = None
 
     def insert(self, val):
-        leaf = BinaryNode(val)
         if self.root == None:
-            self.root = leaf
-        elif val < self.root.value:
-            self.left = leaf
-        elif val > self.root.value:
-            self.right = leaf
+            self.root = val
+        else:
+            leaf = BinarySearchTree()
+            leaf.root = val
+            if val < self.root:
+                self.left = leaf
+            elif val > self.root:
+                self.right = leaf
 
 
     def contains(self, val):
