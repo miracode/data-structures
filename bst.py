@@ -9,33 +9,32 @@ class BinarySearchTree(object):
 
     def insert(self, val):
         leaf = BinarySearchTree(val)
-        if self.value is None:
+        if not self.value:
             self.value = val
 
         if val < self.value:
-            if self.left is None:
+            if not self.left:
                 self.left = leaf
             else:
                 self.left.insert(val)
         elif val > self.value:
-            if self.right is None:
+            if not self.right:
                 self.right = leaf
             else:
                 self.right.insert(val)
 
     def contains(self, val):
-        print self.value, val
-        if self.value is None:
+        if not self.value:
             return False
         elif val == self.value:
             return True
         elif val < self.value:
-            if self.left is None:
+            if not self.left:
                 return False
             else:
                 return self.left.contains(val)
         elif val > self.value:
-            if self.right is None:
+            if not self.right:
                 return False
             else:
                 return self.right.contains(val)
