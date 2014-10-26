@@ -8,6 +8,7 @@ class BinarySearchTree(object):
         self.right = None
 
     def insert(self, val):
+        """Insert a value into the BST"""
         leaf = BinarySearchTree(val)
         if not self.value:
             self.value = val
@@ -24,6 +25,7 @@ class BinarySearchTree(object):
                 self.right.insert(val)
 
     def contains(self, val):
+        """Return True if BST contains value, otherwise False"""
         if not self.value:
             return False
         elif val == self.value:
@@ -42,6 +44,7 @@ class BinarySearchTree(object):
             return False
 
     def size(self):
+        """Return the number of nodes in the BST"""
         count = 0
         # count current value
         if self.value:
@@ -56,6 +59,7 @@ class BinarySearchTree(object):
         return count
 
     def depth(self):
+        """Return the depth of the BST"""
         count = 0
         count_left = 0
         count_right = 0
@@ -74,6 +78,8 @@ class BinarySearchTree(object):
         return count
 
     def balance(self):
+        """Return 0 for a balanced tree, otherwise a positive or negative
+        integer indicating the imbalance to the left or right, respectively"""
         count_left = 0
         count_right = 0
         # current value

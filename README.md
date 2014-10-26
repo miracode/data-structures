@@ -34,3 +34,7 @@ create a priority queue where lowest number has highest priority
 - insert(value, priority) - add value to queue
 - pop() - returns and removes highest priority value in queue
 - peek() - returns highest priority value without removing
+
+bst.py  
+create a binary search tree  
+numbers added to the tree are placed to left if lower or to the right if higher
