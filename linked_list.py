@@ -5,17 +5,16 @@
 
 class Node(object):
 
-    def __init__(self, val, ref_to):
-        self.val = val
-        self.ref_to = ref_to
+    def __init__(self, data, next):
+        self.data = data
+        self.next = next
 
 
 class Linked_list(object):
 
     def __init__(self, *args):
         self.size = 0
-        #self.llist = ()
-        self.first_n = None
+        self.first_node = None
         # reverse args since they are inserted in reverse
         args = args[::-1]
         for arg in args:
@@ -23,50 +22,50 @@ class Linked_list(object):
 
     def pop(self):
         """Remove first node of linked list"""
-        x = self.first_n
-        self.first_n = self.first_n.ref_to
+        x = self.first_node
+        self.first_node = self.first_node.next
         return x
 
-    def insert(self, val):
-        """Insert a value to the head of a linked list"""
-        new_n = Node(val, self.first_n)
-        self.first_n = new_n
+    def insert(self, data):
+        """Insert a dataue to the head of a linked list"""
+        new_node = Node(data, self.first_node)
+        self.first_node = new_node
         self.size += 1
 
     def size(self):
         """Return the size of the linked list"""
         return self.size
 
-    def search(self, val):
-        """Return node containing value in linked list"""
-        n = self.first_n
+    def search(self, data):
+        """Return node containing dataue in linked list"""
+        n = self.first_node
         while True:
-            if n.val == val:
+            if n.data == data:
                 return n
-            n = n.ref_to
+            n = n.next
         return None
 
     def remove(self, node):
         """Remove specified node from linked list"""
-        if self.first_n == node:
-            self.first_n = self.first_n.ref_to
+        if self.first_node == node:
+            self.first_node = self.first_node.next
         else:
-            c_node = self.first_n.ref_to
-            prev = self.first_n
+            c_node = self.first_node.next
+            prev = self.first_node
 
             while True:
                 if c_node == node:
-                    prev.ref_to = c_node.ref_to
+                    prev.next = c_node.next
                     break
                 prev = c_node
-                c_node = c_node.ref_to
+                c_node = c_node.next
 
-    def lprint(self):
+    def print_tuple(self):
         """Print entire linked list as a tuple literal"""
         # hint use a __ function
-        n = self.first_n
-        ll_tuple = ()
+        n = self.first_node
+        linked_list_tuple = ()
         while n:
-            ll_tuple = ll_tuple + (n.val, )
-            n = n.ref_to
-        print ll_tuple
+            linked_list_tuple = linked_list_tuple + (n.data, )
+            n = n.next
+        print linked_list_tuple
