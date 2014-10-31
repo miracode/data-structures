@@ -184,3 +184,11 @@ class BSTTest(unittest.TestCase):
             test_bst.insert(val)
         test_bst.delete(9)
         assert test_bst.contains(9) is False
+
+    def test_delete_node_two_children(self):
+        test_bst = bst.BinarySearchTree()
+        vals = [9, 12, 2]
+        for val in vals:
+            test_bst.insert(val)
+        test_bst.delete(12)
+        assert test_bst.contains(12) is False

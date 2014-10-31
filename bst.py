@@ -124,7 +124,13 @@ class BinarySearchTree(object):
                     self.parent.right = self.left
             else:
                 # replace with largest of left node's children
-                print 'ooops'
+                #### determine max left value
+                repl_val = _max_left_val(self.left)
+                #### delete max left value (no children)
+                self.delete(repl_val)
+                #### replace current val with max val
+                self.value = repl_val
+
         # Otherwise, check subsequent BTs
         elif val < self.value:
             if not self.left:
@@ -139,3 +145,9 @@ class BinarySearchTree(object):
                 self.right.delete(val, parent_side='right')
         else:
             return ValueError("%s not in BST" % (val, ))
+
+    def _max_left_val(self, node):
+        if node.right is None:
+            return self.value
+        else:
+            _max_left_val(node.right)
