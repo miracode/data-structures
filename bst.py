@@ -1,4 +1,9 @@
-"""Binary Search Tree"""
+"""
+Binary Search Tree
+
+This is a recursive binary search tree, each node is
+also of class BinarySearchTree.
+"""
 
 
 class BinarySearchTree(object):
@@ -6,10 +11,12 @@ class BinarySearchTree(object):
         self.value = value
         self.left = None
         self.right = None
+        self.parent = None
 
     def insert(self, val):
         """Insert a value into the BST"""
         leaf = BinarySearchTree(val)
+        leaf.parent = self
         if not self.value:
             self.value = val
 
@@ -91,3 +98,56 @@ class BinarySearchTree(object):
                 count_right += 1 + self.right.balance()
         diff = count_right - count_left
         return diff
+
+    def delete(self, val, parent_side=None):
+        if not self.value:
+            return ValueError("%s not in emtpy BST" % (val, ))
+
+        elif val == self.value:
+            # delete node
+            if self.parent is None:
+                self.value = None
+            elif not self.left and not self.right:
+                if parent_side == 'left':
+                    self.parent.left = None
+                elif parent_side == 'right':
+                    self.parent.right = None
+            elif not self.left:
+                if parent_side == 'left':
+                    self.parent.left = self.right
+                elif parent_side == 'right':
+                    self.parent.right = self.right
+            elif not self.right:
+                if parent_side == 'left':
+                    self.parent.left = self.left
+                elif parent_side == 'right':
+                    self.parent.right = self.left
+            else:
+                # replace with largest of left node's children
+                #### determine max left value
+                repl_val = self._max_left_val(self.left)
+                #### delete max left value (no children)
+                self.delete(repl_val)
+                #### replace current val with max val
+                self.value = repl_val
+
+        # Otherwise, check subsequent BTs
+        elif val < self.value:
+            if not self.left:
+                return ValueError("%s not in BST" % (val, ))
+            else:
+                # keep checking
+                self.left.delete(val, parent_side='left')
+        elif val > self.value:
+            if not self.right:
+                return ValueError("%s not in BST" % (val, ))
+            else:
+                self.right.delete(val, parent_side='right')
+        else:
+            return ValueError("%s not in BST" % (val, ))
+
+    def _max_left_val(self, node):
+        if node.right is None:
+            return node.value
+        else:
+            return self._max_left_val(node.right)
