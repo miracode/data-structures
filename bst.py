@@ -1,4 +1,9 @@
-"""Binary Search Tree"""
+"""
+Binary Search Tree
+
+This is a recursive binary search tree, each node is
+also of class BinarySearchTree.
+"""
 
 
 class BinarySearchTree(object):
@@ -6,6 +11,7 @@ class BinarySearchTree(object):
         self.value = value
         self.left = None
         self.right = None
+        self.parent = None
 
     def insert(self, val):
         """Insert a value into the BST"""
@@ -16,6 +22,7 @@ class BinarySearchTree(object):
         if val < self.value:
             if not self.left:
                 self.left = leaf
+                leaf.parent = self
             else:
                 self.left.insert(val)
         elif val > self.value:
@@ -91,3 +98,24 @@ class BinarySearchTree(object):
                 count_right += 1 + self.right.balance()
         diff = count_right - count_left
         return diff
+
+    def delete(self, val, parent=None):
+        if not self.value:
+            return ValueError("%s not in emtpy BST" % (val, ))
+        elif val == self.value:
+            # delete first node
+            return
+        elif val < self.value:
+            if not self.left:
+                return ValueError("%s not in BST" % (val, ))
+            else:
+                # delete this node
+                self.left.delete(val, parent=self.left)
+        elif val > self.value:
+            if not self.right:
+                return ValueError("%s not in BST" % (val, ))
+            else:
+                self.right.delete(val, parent=self.right)
+        else:
+            return ValueError("%s not in BST" % (val, ))
+        # if no children, node's parent is now None

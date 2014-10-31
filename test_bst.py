@@ -7,8 +7,9 @@ class BSTTest(unittest.TestCase):
         first_val = 9
         test_bst = bst.BinarySearchTree()
         test_bst.insert(first_val)
-        expected = (9, None, None)
-        actual = (test_bst.value, test_bst.left, test_bst.right)
+        expected = (9, None, None, None)
+        actual = (test_bst.value, test_bst.left, test_bst.right,
+                  test_bst.parent)
         self.assertEquals(expected, actual)
 
     def test_insert_two(self):
