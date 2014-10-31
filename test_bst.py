@@ -154,6 +154,10 @@ class BSTTest(unittest.TestCase):
         bal = test_bst2.balance()
         self.assertEquals(bal, 2)
 
-
-
-
+    def test_delete_node_no_children(self):
+        test_bst = bst.BinarySearchTree()
+        vals = [12, 2, 7, 14, 9]
+        for val in vals:
+            test_bst.insert(val)
+        test_bst.delete(14)
+        assert test_bst.right is None
