@@ -99,7 +99,7 @@ class BinarySearchTree(object):
         diff = count_right - count_left
         return diff
 
-    def delete(self, val):
+    def delete(self, val, side=None):
         if not self.value:
             return ValueError("%s not in emtpy BST" % (val, ))
 
@@ -134,6 +134,15 @@ class BinarySearchTree(object):
         #         self.right.delete(val)
         # else:
         #     return ValueError("%s not in BST" % (val, ))
+
         # # if no children, node's parent is now None
-        if not self.left and not self.right:
-            self.parent.right = None
+
+        # if not self.left and not self.right:
+        #     self.parent.right = None
+        # elif not self.left:
+        #     self.parent.right = self
+        if self.parent is None:
+            print "no parent"
+            self.value = None
+        else:
+            print "parent is %s" % self.parent
