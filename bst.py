@@ -16,18 +16,18 @@ class BinarySearchTree(object):
     def insert(self, val):
         """Insert a value into the BST"""
         leaf = BinarySearchTree(val)
+        leaf.parent = self
         if not self.value:
             self.value = val
+
         if val < self.value:
             if not self.left:
                 self.left = leaf
-                leaf.parent = self
             else:
                 self.left.insert(val)
         elif val > self.value:
             if not self.right:
                 self.right = leaf
-                leaf.parent = self
             else:
                 self.right.insert(val)
 
@@ -99,23 +99,41 @@ class BinarySearchTree(object):
         diff = count_right - count_left
         return diff
 
-    def delete(self, val, parent=None):
+    def delete(self, val):
         if not self.value:
             return ValueError("%s not in emtpy BST" % (val, ))
-        elif val == self.value:
-            # delete first node
-            return
-        elif val < self.value:
-            if not self.left:
-                return ValueError("%s not in BST" % (val, ))
+
+        while val != self.value:
+            if val < self.value:
+                if not self.left:
+                    return ValueError("%s not in BST" % (val, ))
+                else:
+                    # keep checking
+                    self.left.delete(val)
+            elif val > self.value:
+                if not self.right:
+                    return ValueError("%s not in BST" % (val, ))
+                else:
+                    self.right.delete(val)
             else:
-                # delete this node
-                self.left.delete(val, parent=self.left)
-        elif val > self.value:
-            if not self.right:
                 return ValueError("%s not in BST" % (val, ))
-            else:
-                self.right.delete(val, parent=self.right)
-        else:
-            return ValueError("%s not in BST" % (val, ))
-        # if no children, node's parent is now None
+
+        # elif val == self.value:
+        #     # delete node
+        #     break
+        # elif val < self.value:
+        #     if not self.left:
+        #         return ValueError("%s not in BST" % (val, ))
+        #     else:
+        #         # keep checking
+        #         self.left.delete(val)
+        # elif val > self.value:
+        #     if not self.right:
+        #         return ValueError("%s not in BST" % (val, ))
+        #     else:
+        #         self.right.delete(val)
+        # else:
+        #     return ValueError("%s not in BST" % (val, ))
+        # # if no children, node's parent is now None
+        if not self.left and not self.right:
+            self.parent.right = None
