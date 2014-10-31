@@ -18,7 +18,6 @@ class BinarySearchTree(object):
         leaf = BinarySearchTree(val)
         if not self.value:
             self.value = val
-
         if val < self.value:
             if not self.left:
                 self.left = leaf
@@ -28,6 +27,7 @@ class BinarySearchTree(object):
         elif val > self.value:
             if not self.right:
                 self.right = leaf
+                leaf.parent = self
             else:
                 self.right.insert(val)
 

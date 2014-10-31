@@ -18,10 +18,10 @@ class BSTTest(unittest.TestCase):
         test_bst = bst.BinarySearchTree()
         test_bst.insert(first_val)
         test_bst.insert(second_val)
-        expected = (9, None, 7, None, None)
+        expected = (9, None, 7, None, None, 9)
         actual = (test_bst.value, test_bst.right,
                   test_bst.left.value, test_bst.left.left,
-                  test_bst.left.right)
+                  test_bst.left.right, test_bst.left.parent.value)
         self.assertEquals(expected, actual)
 
     def test_insert_three1(self):
@@ -32,10 +32,11 @@ class BSTTest(unittest.TestCase):
         test_bst.insert(first_val)
         test_bst.insert(second_val)
         test_bst.insert(third_val)
-        expected = (9, 7, None, None, 12, None, None)
+        expected = (9, 7, None, None, 12, None, None, 9, 9)
         actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
                   test_bst.left.right, test_bst.right.value,
-                  test_bst.right.left, test_bst.right.right)
+                  test_bst.right.left, test_bst.right.right,
+                  test_bst.right.parent.value, test_bst.left.parent.value)
         self.assertEquals(expected, actual)
 
     def test_insert_three2(self):
@@ -49,12 +50,14 @@ class BSTTest(unittest.TestCase):
         expected1 = (12, None)
         actual1 = (test_bst.value, test_bst.right)
         self.assertEquals(expected1, actual1)
-        expected2 = (9, None)
-        actual2 = (test_bst.left.value, test_bst.left.right)
+        expected2 = (9, None, 12)
+        actual2 = (test_bst.left.value, test_bst.left.right,
+                   test_bst.left.parent.value)
         self.assertEquals(expected2, actual2)
-        expected3 = (7, None, None)
+        expected3 = (7, None, None, 9)
         actual3 = (test_bst.left.left.value, test_bst.left.left.left,
-                   test_bst.left.left.right)
+                   test_bst.left.left.right,
+                   test_bst.left.left.parent.value)
         self.assertEquals(expected3, actual3)
 
     def test_insert_many(self):
