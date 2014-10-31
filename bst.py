@@ -103,46 +103,26 @@ class BinarySearchTree(object):
         if not self.value:
             return ValueError("%s not in emtpy BST" % (val, ))
 
-        while val != self.value:
-            if val < self.value:
-                if not self.left:
-                    return ValueError("%s not in BST" % (val, ))
-                else:
-                    # keep checking
-                    self.left.delete(val)
-            elif val > self.value:
-                if not self.right:
-                    return ValueError("%s not in BST" % (val, ))
-                else:
-                    self.right.delete(val)
-            else:
+        elif val == self.value:
+            # delete node
+            if self.parent is None:
+                self.value = None
+            elif not self.left and not self.right:
+                if side == 'left':
+                    self.parent.left = None
+                elif side == 'right':
+                    self.parent.right = None
+
+        elif val < self.value:
+            if not self.left:
                 return ValueError("%s not in BST" % (val, ))
-
-        # elif val == self.value:
-        #     # delete node
-        #     break
-        # elif val < self.value:
-        #     if not self.left:
-        #         return ValueError("%s not in BST" % (val, ))
-        #     else:
-        #         # keep checking
-        #         self.left.delete(val)
-        # elif val > self.value:
-        #     if not self.right:
-        #         return ValueError("%s not in BST" % (val, ))
-        #     else:
-        #         self.right.delete(val)
-        # else:
-        #     return ValueError("%s not in BST" % (val, ))
-
-        # # if no children, node's parent is now None
-
-        # if not self.left and not self.right:
-        #     self.parent.right = None
-        # elif not self.left:
-        #     self.parent.right = self
-        if self.parent is None:
-            print "no parent"
-            self.value = None
+            else:
+                # keep checking
+                self.left.delete(val, side='left')
+        elif val > self.value:
+            if not self.right:
+                return ValueError("%s not in BST" % (val, ))
+            else:
+                self.right.delete(val, side='right')
         else:
-            print "parent is %s" % self.parent
+            return ValueError("%s not in BST" % (val, ))
