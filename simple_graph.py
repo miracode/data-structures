@@ -10,12 +10,12 @@ class Edge(object):
 class Graph(object):
 
     def __init__(self):
-        self.nodes = []
-        self.edges = []
+        self.nodes_list = []
+        self.edges_list = []
 
     def nodes(self):
         """Return list of all nodes in graph"""
-        pass
+        return self.nodes_list
 
     def edges(self):
         """Return list of all edges in graph"""
