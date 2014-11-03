@@ -1,10 +1,13 @@
 
 class Node(object):
-    pass
+    def __init__(self, value=None):
+        self.value = value
 
 
 class Edge(object):
-    pass
+    def __init__(self, n1=None, n2=None):
+        self.n1 = n1
+        self.n2 = n2
 
 
 class Graph(object):
@@ -24,3 +27,7 @@ class Graph(object):
     def add_node(self, node):
         """Add new node to the graph"""
         self.nodes_list.append(node)
+
+    def add_edge(self, n1, n2):
+        new_edge = Edge(n1, n2)
+        self.edges_list.append(new_edge)

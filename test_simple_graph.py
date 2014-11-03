@@ -35,5 +35,5 @@ class GraphTest(unittest.TestCase):
         new_node1 = simple_graph.Node()
         new_node2 = simple_graph.Node()
         g.add_edge(new_node1, new_node2)
-        assert g.edges[0].n1 == new_node1
-        assert g.edges[0].n2 == new_node2
+        assert g.edges()[0].n1 == new_node1
+        assert g.edges()[0].n2 == new_node2
