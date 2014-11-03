@@ -115,5 +115,13 @@ in graph.")
         assert n4 in neighb
         assert n3 not in neighb
 
+    def test_neighb_no_node(self):
+        g = simple_graph.Graph()
+        node = simple_graph.Node('Nope')
+        with self.assertRaises(IndexError) as context:
+            g.neighbors(node)
+        self.assertEqual(context.exception.message, u"Node does not \
+exist in graph")
+
 if __name__ == '__main__':
     unittest.main()
