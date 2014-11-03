@@ -65,3 +65,10 @@ class Graph(object):
 
         if not edge_in_graph:
             raise IndexError(u"Edge does not exist in graph.")
+
+    def has_node(self, n):
+        """Returns True if node is in the graph, otherwise False"""
+        if n in self.nodes_list:
+            return True
+        else:
+            return False
