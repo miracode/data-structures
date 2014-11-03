@@ -19,4 +19,4 @@ class Graph(object):
 
     def edges(self):
         """Return list of all edges in graph"""
-        pass
+        return self.edges_list
