@@ -72,6 +72,14 @@ class GraphTest(unittest.TestCase):
         assert len(g.nodes()) == 1
         assert len(g.edges()) == 0
 
+    def test_del_edge_exists(self):
+        g = simple_graph.Graph()
+        new_node1 = simple_graph.Node()
+        new_node2 = simple_graph.Node()
+        g.add_edge(new_node1, new_node2)
+        g.del_edge(new_node1, new_node2)
+        assert len(g.edges()) == 0
+
 
 if __name__ == '__main__':
     unittest.main()
