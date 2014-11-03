@@ -63,6 +63,15 @@ class GraphTest(unittest.TestCase):
         self.assertEqual(context.exception.message,
                          u"Node does not exist in graph.")
 
+    def test_del_node_deletes_edges(self):
+        g = simple_graph.Graph()
+        new_node1 = simple_graph.Node()
+        new_node2 = simple_graph.Node()
+        g.add_edge(new_node1, new_node2)
+        g.del_node(new_node1)
+        assert len(g.nodes()) == 1
+        assert len(g.edges()) == 0
+
 
 if __name__ == '__main__':
     unittest.main()
