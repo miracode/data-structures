@@ -18,3 +18,8 @@ class GraphTest(unittest.TestCase):
         g = simple_graph.Graph()
         no_edges = g.edges()
         assert no_edges == []
+
+    def test_edges(self):
+        g = simple_graph.Graph()
+        g.edges_list = [simple_graph.Edge(), simple_graph.Edge()]
+        assert len(g.edges()) == 2
