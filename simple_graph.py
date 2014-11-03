@@ -20,3 +20,7 @@ class Graph(object):
     def edges(self):
         """Return list of all edges in graph"""
         return self.edges_list
+
+    def add_node(self, node):
+        """Add new node to the graph"""
+        self.nodes_list.append(node)
