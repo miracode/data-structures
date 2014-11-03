@@ -12,7 +12,7 @@ class Graph(object):
     def __init__(self):
         self.nodes = []
         self.edges = []
-    
+
     def nodes(self):
         """Return list of all nodes in graph"""
         pass
