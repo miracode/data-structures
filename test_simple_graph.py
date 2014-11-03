@@ -52,3 +52,17 @@ class GraphTest(unittest.TestCase):
         g.add_node(new_node)
         g.del_node(new_node)
         assert len(g.nodes()) == 0
+
+    def test_del_node_not_exist(self):
+        g = simple_graph.Graph()
+        new_node1 = simple_graph.Node('hello')
+        new_node2 = simple_graph.Node('goodbye')
+        g.add_node(new_node1)
+        with self.assertRaises(IndexError) as context:
+            g.del_node(new_node2)
+        self.assertEqual(context.exception.message,
+                         u"Node does not exist in graph.")
+
+
+if __name__ == '__main__':
+    unittest.main()

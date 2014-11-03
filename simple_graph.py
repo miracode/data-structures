@@ -53,4 +53,4 @@ class Graph(object):
                 node_in_graph = True
 
         if not node_in_graph:
-            raise IndexError("Node does not exist in graph.")
+            raise IndexError(u"Node does not exist in graph.")
