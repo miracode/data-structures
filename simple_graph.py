@@ -72,3 +72,14 @@ class Graph(object):
             return True
         else:
             return False
+
+    def neighbors(self, n):
+        """Returns list of nodes connected to given node"""
+        #if not self.has_node(n) raise IndexError
+        neighb = []
+        for edge in self.edges_list:
+            if edge.n1 == n:
+                neighb.append(edge.n2)
+            if edge.n2 == n:
+                neighb.append(edge.n1)
+        return neighb
