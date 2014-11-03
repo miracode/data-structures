@@ -88,7 +88,7 @@ class GraphTest(unittest.TestCase):
         g.add_edge(new_node1, new_node2)
         with self.assertRaises(IndexError) as context:
             g.del_edge(new_node1, new_node3)
-        self.assertEqual(context.exception.message, u"Edge does not exist\
+        self.assertEqual(context.exception.message, u"Edge does not exist \
 in graph.")
         assert len(g.edges()) == 1
 
