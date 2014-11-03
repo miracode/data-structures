@@ -29,5 +29,11 @@ class Graph(object):
         self.nodes_list.append(node)
 
     def add_edge(self, n1, n2):
+        """Add new edge to graph"""
         new_edge = Edge(n1, n2)
         self.edges_list.append(new_edge)
+        # If new nodes do not exists in list of nodes, add them
+        if n1 not in self.nodes():
+            self.add_node(n1)
+        if n2 not in self.nodes():
+            self.add_node(n2)
