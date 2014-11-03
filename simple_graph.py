@@ -37,3 +37,20 @@ class Graph(object):
             self.add_node(n1)
         if n2 not in self.nodes():
             self.add_node(n2)
+
+    def del_node(self, n):
+        """Delete specified node from the graph"""
+        # Determine if node exists in edges & remove
+        for edge in self.edges_list:
+            if n == edge.n1 or n == edge.n2:
+                self.edges_list.remove(edge)
+
+        # If node exists in list of nodes, remove. Else raise error
+        node_in_graph = False
+        for node in self.nodes_list:
+            if n == node:
+                self.nodes_list.remove(n)
+                node_in_graph = True
+
+        if not node_in_graph:
+            raise IndexError("Node does not exist in graph.")
