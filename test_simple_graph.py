@@ -23,3 +23,9 @@ class GraphTest(unittest.TestCase):
         g = simple_graph.Graph()
         g.edges_list = [simple_graph.Edge(), simple_graph.Edge()]
         assert len(g.edges()) == 2
+
+    def test_add_node(self):
+        g = simple_graph.Graph()
+        new_node = simple_graph.Node()
+        g.add_node(new_node)
+        assert len(g.nodes()) == 1
