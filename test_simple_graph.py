@@ -92,6 +92,13 @@ class GraphTest(unittest.TestCase):
 in graph.")
         assert len(g.edges()) == 1
 
+    def test_has_node(self):
+        g = simple_graph.Graph()
+        new_node1 = simple_graph.Node('yes')
+        new_node2 = simple_graph.Node('no')
+        g.add_node(new_node1)
+        assert g.has_node(new_node1) is True
+        assert g.has_node(new_node2) is False
 
 if __name__ == '__main__':
     unittest.main()
