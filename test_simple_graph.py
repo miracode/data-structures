@@ -45,3 +45,10 @@ class GraphTest(unittest.TestCase):
         g.add_edge(new_node1, new_node2)
         assert new_node1 in g.nodes()
         assert new_node2 in g.nodes()
+
+    def test_del_node_exists(self):
+        g = simple_graph.Graph()
+        new_node = simple_graph.Node('hello')
+        g.add_node(new_node)
+        g.del_node(new_node)
+        assert len(g.nodes()) == 0
