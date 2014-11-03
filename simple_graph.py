@@ -54,3 +54,9 @@ class Graph(object):
 
         if not node_in_graph:
             raise IndexError(u"Node does not exist in graph.")
+
+    def del_edge(self, n1, n2):
+        """Delete edge connecting specified nodes"""
+        for edge in self.edges_list:
+            if n1 == edge.n1 and n2 == edge.n2:
+                self.edges_list.remove(edge)
