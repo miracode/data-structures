@@ -123,5 +123,6 @@ in graph.")
         self.assertEqual(context.exception.message, u"Node does not \
 exist in graph")
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -8,6 +8,7 @@ class Edge(object):
     def __init__(self, n1=None, n2=None):
         self.n1 = n1
         self.n2 = n2
+        self.nodes = (n1, n2)
 
 
 class Graph(object):
@@ -42,7 +43,7 @@ class Graph(object):
         """Delete specified node from the graph"""
         # Determine if node exists in edges & remove
         for edge in self.edges_list:
-            if n == edge.n1 or n == edge.n2:
+            if n in edge.nodes:
                 self.edges_list.remove(edge)
 
         # If node exists in list of nodes, remove. Else raise error
@@ -59,7 +60,7 @@ class Graph(object):
         """Delete edge connecting specified nodes"""
         edge_in_graph = False
         for edge in self.edges_list:
-            if n1 == edge.n1 and n2 == edge.n2:
+            if n1 in edge.nodes and n2 in edge.nodes:
                 self.edges_list.remove(edge)
                 edge_in_graph = True
 
