@@ -41,10 +41,6 @@ class Graph(object):
 
     def del_node(self, n):
         """Delete specified node from the graph"""
-        # Determine if node exists in edges & remove
-        for edge in self.edges_list:
-            if n in edge.nodes:
-                self.edges_list.remove(edge)
 
         # If node exists in list of nodes, remove. Else raise error
         node_in_graph = False
@@ -53,7 +49,13 @@ class Graph(object):
                 self.nodes_list.remove(n)
                 node_in_graph = True
 
-        if not node_in_graph:
+        # Determine if node exists in edges & remove
+        if node_in_graph:
+            for edge in self.edges_list:
+                if n in edge.nodes:
+                    self.edges_list.remove(edge)
+
+        else:
             raise IndexError(u"Node does not exist in graph.")
 
     def del_edge(self, n1, n2):
