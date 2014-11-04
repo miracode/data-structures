@@ -86,3 +86,16 @@ class Graph(object):
                 if edge.n2 == n:
                     neighb.append(edge.n1)
             return neighb
+
+    def adjacent(self, n1, n2):
+        """Returns True if edge connects two nodes, False if not"""
+        if not self.has_node(n1):
+            raise IndexError(u"Node does not exist in graph")
+        elif not self.has_node(n2):
+            raise IndexError(u"Node does not exist in graph")
+        else:
+            edge_in_graph = False
+            for edge in self.edges_list:
+                if n1 in edge.nodes and n2 in edge.nodes:
+                    edge_in_graph = True
+            return edge_in_graph
