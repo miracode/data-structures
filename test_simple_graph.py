@@ -136,6 +136,15 @@ exist in graph")
         assert g.adjacent(n1, n2) is True
         assert g.adjacent(n1, n3) is False
 
+    def test_adjacent_error(self):
+        g = simple_graph.Graph()
+        n1 = simple_graph.Node('n1')
+        n2 = simple_graph.Node('n2')
+        with self.assertRaises(IndexError) as context:
+            g.adjacent(n1, n2)
+        self.assertEqual(context.exception.message, u"Node does not exist \
+in graph")
+
 
 if __name__ == '__main__':
     unittest.main()
