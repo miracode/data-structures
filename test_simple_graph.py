@@ -77,7 +77,7 @@ class GraphTest(unittest.TestCase):
         new_node1 = simple_graph.Node()
         new_node2 = simple_graph.Node()
         g.add_edge(new_node1, new_node2)
-        g.del_edge(new_node1, new_node2)
+        g.del_edge(new_node2, new_node1)
         assert len(g.edges()) == 0
 
     def test_del_edge_not_exists(self):
@@ -122,6 +122,7 @@ in graph.")
             g.neighbors(node)
         self.assertEqual(context.exception.message, u"Node does not \
 exist in graph")
+
 
 
 if __name__ == '__main__':
