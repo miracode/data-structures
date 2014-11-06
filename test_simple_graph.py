@@ -14,15 +14,19 @@ class GraphTest(unittest.TestCase):
         g.nodes_list = [simple_graph.Node(1), simple_graph.Node(2)]
         assert g.nodes() == [1, 2]
 
-#     def test_no_edges(self):
-#         g = simple_graph.Graph()
-#         no_edges = g.edges()
-#         assert no_edges == []
+    def test_no_edges(self):
+        g = simple_graph.Graph()
+        no_edges = g.edges()
+        assert no_edges == []
 
-#     def test_edges(self):
-#         g = simple_graph.Graph()
-#         g.edges_list = [simple_graph.Edge(), simple_graph.Edge()]
-#         assert len(g.edges()) == 2
+    def test_edges(self):
+        g = simple_graph.Graph()
+        node1 = simple_graph.Node(1)
+        node2 = simple_graph.Node(2)
+        node3 = simple_graph.Node(3)
+        g.edges_list = [simple_graph.Edge(node1, node2),
+                        simple_graph.Edge(node1, node3)]
+        assert g.edges() == [(1, 2), (1, 3)]
 
 #     def test_add_node(self):
 #         g = simple_graph.Graph()
