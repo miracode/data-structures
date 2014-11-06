@@ -28,19 +28,18 @@ class GraphTest(unittest.TestCase):
                         simple_graph.Edge(node1, node3)]
         assert g.edges() == [(1, 2), (1, 3)]
 
-#     def test_add_node(self):
-#         g = simple_graph.Graph()
-#         new_node = simple_graph.Node(1)
-#         g.add_node(new_node)
-#         assert len(g.nodes()) == 1
+    def test_add_node(self):
+        g = simple_graph.Graph()
+        g.add_node(1)
+        assert g.nodes() == [1]
 
-#     def test_add_edge(self):
-#         g = simple_graph.Graph()
-#         new_node1 = simple_graph.Node(1)
-#         new_node2 = simple_graph.Node(2)
-#         g.add_edge(new_node1, new_node2)
-#         assert new_node1.value in g.edges
-#         assert g.edges()[0].n2 == new_node2
+    def test_add_edge(self):
+        g = simple_graph.Graph()
+        new_node_val1 = 1
+        new_node_val2 = 2
+        g.add_edge(new_node_val1, new_node_val2)
+        assert new_node_val1 in g.edges()[0]
+        assert new_node_val2 in g.edges()[0]
 
 #     def test_add_edge_nodes(self):
 #         g = simple_graph.Graph()

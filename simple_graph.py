@@ -25,19 +25,27 @@ class Graph(object):
         """Return list of all edge tuples in graph"""
         return [edge.node_vals for edge in self.edges_list]
 
-    def add_node(self, node):
-        """Add new node to the graph"""
-        self.nodes_list.append(node)
+    def add_node(self, node_val):
+        """Add new node value to the graph"""
+        if node_val in self.nodes():
+            raise ValueError("Node already exists in graph")
+        else:
+            node = Node(node_val)
+            self.nodes_list.append(node)
 
     def add_edge(self, n1, n2):
-        """Add new edge to graph"""
-        new_edge = Edge(n1, n2)
+        """Add new edge to graph with given node values"""
+        new_edge = Edge(Node(n1), Node(n2))
         self.edges_list.append(new_edge)
         # If new nodes do not exists in list of nodes, add them
-        if n1 not in self.nodes():
+        try:
             self.add_node(n1)
-        if n2 not in self.nodes():
+        except ValueError:
+            pass
+        try:
             self.add_node(n2)
+        except ValueError:
+            pass
 
     def del_node(self, n):
         """Delete specified node from the graph"""
