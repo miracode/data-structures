@@ -70,7 +70,7 @@ class Graph(object):
         """Delete edge connecting specified nodes"""
         edge_in_graph = False
         for edge in self.edges_list:
-            if n1 in edge.nodes and n2 in edge.nodes:
+            if n1 in edge.node_vals and n2 in edge.node_vals:
                 self.edges_list.remove(edge)
                 edge_in_graph = True
 
