@@ -5,10 +5,10 @@ class Node(object):
 
 
 class Edge(object):
-    def __init__(self, n1=None, n2=None):
+    def __init__(self, n1=Node(), n2=Node()):
         self.n1 = n1
         self.n2 = n2
-        self.nodes = (n1, n2)
+        self.node_vals = (n1.value, n2.value)
 
 
 class Graph(object):
@@ -18,12 +18,12 @@ class Graph(object):
         self.edges_list = []
 
     def nodes(self):
-        """Return list of all nodes in graph"""
-        return self.nodes_list
+        """Return list of all node values in graph"""
+        return [node.value for node in self.nodes_list]
 
     def edges(self):
-        """Return list of all edges in graph"""
-        return self.edges_list
+        """Return list of all edge tuples in graph"""
+        return [edge.node_vals for edge in self.edges_list]
 
     def add_node(self, node):
         """Add new node to the graph"""
