@@ -2,6 +2,7 @@
 class Node(object):
     def __init__(self, value=None):
         self.value = value
+        self.visited = False
 
 
 class Edge(object):
@@ -84,17 +85,23 @@ class Graph(object):
         else:
             return False
 
+    def _neighbors(self, n):
+        """Return list of node objects connected to given node"""
+        neighb = []
+        for edge in self.edges_list:
+            print edge, edge.n1.value, edge.n2.value, n
+            if edge.n1.value == n:
+                neighb.append(edge.n2)
+            if edge.n2.value == n:
+                neighb.append(edge.n1)
+        return neighb
+
     def neighbors(self, n):
-        """Returns list of nodes connected to given node"""
+        """Returns list of node values connected to given node"""
         if not self.has_node(n):
             raise IndexError(u"Node does not exist in graph")
         else:
-            neighb = []
-            for edge in self.edges():
-                if edge[0] == n:
-                    neighb.append(edge[1])
-                if edge[1] == n:
-                    neighb.append(edge[0])
+            neighb = [node.value for node in self._neighbors(n)]
             return neighb
 
     def adjacent(self, n1, n2):
@@ -109,3 +116,26 @@ class Graph(object):
                 if n1 in edge and n2 in edge:
                     edge_in_graph = True
             return edge_in_graph
+
+    def depth_first_traversal(self, start):
+        # Make sure the node exists
+        if self.has_node(start):
+            # Find the node with the start value
+            i = 0
+            start_node = self.nodes_list[0]
+            while start_node.value != start:
+                i += 1
+                start_node = self.nodes_list[i]
+            # Initialize list and flip the start visited flag to True
+            dft_list = []
+            start_node.visited = True
+            for neighb_node in self.neighbors(start):
+                if not neighb_node.vistied:
+                    neighb_node.visted = True
+                    dft_list.append(neighb_node.value)
+                    # recersively search down the line
+                    self.depth_first_traversal(neighb_node.value)
+
+        else:
+            raise IndexError(u"Node does not exist in graph")
+

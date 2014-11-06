@@ -151,6 +151,20 @@ exist in graph")
         self.assertEqual(context.exception.message, u"Node does not exist \
 in graph")
 
+    def test_dft(self):
+        n1 = 1
+        n2 = 2
+        n3 = 3
+        n4 = 4
+        g = simple_graph.Graph()
+        g.add_edge(n1, n2)
+        g.add_edge(n2, n4)
+        g.add_edge(n1, n4)
+        g.add_edge(n2, n3)
+        actual = g.depth_first_traversal(n1)
+        expected = [1, 2, 4, 2, 3, 2, 1]
+        assert actual == expected
+
 
 if __name__ == '__main__':
     unittest.main()
