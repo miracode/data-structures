@@ -79,7 +79,7 @@ class Graph(object):
 
     def has_node(self, n):
         """Returns True if node is in the graph, otherwise False"""
-        if n in self.nodes_list:
+        if n in self.nodes():
             return True
         else:
             return False
