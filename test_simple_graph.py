@@ -129,27 +129,27 @@ in graph.")
         self.assertEqual(context.exception.message, u"Node does not \
 exist in graph")
 
-#     def test_adjacent(self):
-#         n1 = simple_graph.Node('n1')
-#         n2 = simple_graph.Node('n2')
-#         n3 = simple_graph.Node('n3')
-#         n4 = simple_graph.Node('n4')
-#         g = simple_graph.Graph()
-#         g.add_edge(n1, n2)
-#         g.add_edge(n2, n4)
-#         g.add_edge(n1, n4)
-#         g.add_edge(n2, n3)
-#         assert g.adjacent(n1, n2) is True
-#         assert g.adjacent(n1, n3) is False
+    def test_adjacent(self):
+        n1 = 'n1'
+        n2 = 'n2'
+        n3 = 'n3'
+        n4 = 'n4'
+        g = simple_graph.Graph()
+        g.add_edge(n1, n2)
+        g.add_edge(n2, n4)
+        g.add_edge(n1, n4)
+        g.add_edge(n2, n3)
+        assert g.adjacent(n1, n2) is True
+        assert g.adjacent(n1, n3) is False
 
-#     def test_adjacent_error(self):
-#         g = simple_graph.Graph()
-#         n1 = simple_graph.Node('n1')
-#         n2 = simple_graph.Node('n2')
-#         with self.assertRaises(IndexError) as context:
-#             g.adjacent(n1, n2)
-#         self.assertEqual(context.exception.message, u"Node does not exist \
-# in graph")
+    def test_adjacent_error(self):
+        g = simple_graph.Graph()
+        n1 = 'n1'
+        n2 = 'n2'
+        with self.assertRaises(IndexError) as context:
+            g.adjacent(n1, n2)
+        self.assertEqual(context.exception.message, u"Node does not exist \
+in graph")
 
 
 if __name__ == '__main__':

@@ -105,7 +105,7 @@ class Graph(object):
             raise IndexError(u"Node does not exist in graph")
         else:
             edge_in_graph = False
-            for edge in self.edges_list:
-                if n1 in edge.nodes and n2 in edge.nodes:
+            for edge in self.edges():
+                if n1 in edge and n2 in edge:
                     edge_in_graph = True
             return edge_in_graph
