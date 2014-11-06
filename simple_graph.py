@@ -90,11 +90,11 @@ class Graph(object):
             raise IndexError(u"Node does not exist in graph")
         else:
             neighb = []
-            for edge in self.edges_list:
-                if edge.n1 == n:
-                    neighb.append(edge.n2)
-                if edge.n2 == n:
-                    neighb.append(edge.n1)
+            for edge in self.edges():
+                if edge[0] == n:
+                    neighb.append(edge[1])
+                if edge[1] == n:
+                    neighb.append(edge[0])
             return neighb
 
     def adjacent(self, n1, n2):

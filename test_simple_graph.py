@@ -106,28 +106,28 @@ in graph.")
         assert g.has_node(new_node1) is True
         assert g.has_node(new_node2) is False
 
-#     def test_neighbors(self):
-#         n1 = simple_graph.Node('n1')
-#         n2 = simple_graph.Node('n2')
-#         n3 = simple_graph.Node('n3')
-#         n4 = simple_graph.Node('n4')
-#         g = simple_graph.Graph()
-#         g.add_edge(n1, n2)
-#         g.add_edge(n2, n4)
-#         g.add_edge(n1, n4)
-#         g.add_edge(n2, n3)
-#         neighb = g.neighbors(n1)
-#         assert n2 in neighb
-#         assert n4 in neighb
-#         assert n3 not in neighb
+    def test_neighbors(self):
+        n1 = 'n1'
+        n2 = 'n2'
+        n3 = 'n3'
+        n4 = 'n4'
+        g = simple_graph.Graph()
+        g.add_edge(n1, n2)
+        g.add_edge(n2, n4)
+        g.add_edge(n1, n4)
+        g.add_edge(n2, n3)
+        neighb = g.neighbors(n1)
+        assert n2 in neighb
+        assert n4 in neighb
+        assert n3 not in neighb
 
-#     def test_neighb_no_node(self):
-#         g = simple_graph.Graph()
-#         node = simple_graph.Node('Nope')
-#         with self.assertRaises(IndexError) as context:
-#             g.neighbors(node)
-#         self.assertEqual(context.exception.message, u"Node does not \
-# exist in graph")
+    def test_neighb_no_node(self):
+        g = simple_graph.Graph()
+        node = 'Nope'
+        with self.assertRaises(IndexError) as context:
+            g.neighbors(node)
+        self.assertEqual(context.exception.message, u"Node does not \
+exist in graph")
 
 #     def test_adjacent(self):
 #         n1 = simple_graph.Node('n1')
