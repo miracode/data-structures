@@ -53,14 +53,14 @@ class Graph(object):
         # If node exists in list of nodes, remove. Else raise error
         node_in_graph = False
         for node in self.nodes_list:
-            if n == node:
-                self.nodes_list.remove(n)
+            if n == node.value:
+                self.nodes_list.remove(node)
                 node_in_graph = True
 
         # Determine if node exists in edges & remove
         if node_in_graph:
             for edge in self.edges_list:
-                if n in edge.nodes:
+                if n in edge.node_vals:
                     self.edges_list.remove(edge)
 
         else:
