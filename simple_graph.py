@@ -1,3 +1,5 @@
+from collections import deque
+
 
 class Node(object):
     def __init__(self, value=None, visited=False):
@@ -120,6 +122,9 @@ class Graph(object):
             return edge_in_graph
 
     def depth_first_traversal(self, start):
+        """
+        Return nodes that are viewed in the order of depth first traversal
+        """
         # Make sure the node exists
         if self.has_node(start):
             # Find the node with the start value
@@ -128,7 +133,7 @@ class Graph(object):
             while start_node.value != start:
                 i += 1
                 start_node = self.nodes_list[i]
-            # Initialize list and flip the start visited flag to True
+            # Initialize list
             dft_list = []
             dft_stack = [start_node]
             while dft_stack:
@@ -139,7 +144,32 @@ class Graph(object):
                     for neighb in self._neighbors(v.value):
                         dft_stack.append(neighb)
             return dft_list
-
         else:
-            raise ValueError(u"Node does not exist in graph")
+            raise ValueError("Start node does not exist in graph")
+
+    def breadth_first_traversal(self, start):
+        """
+        Return nodes that are viewed in order of breadth first traversal
+        """
+        # Make sure the node exists
+        if self.has_node(start):
+            # Find the node with the start value
+            i = 0
+            start_node = self.nodes_list[0]
+            while start_node.value != start:
+                i += 1
+                start_node = self.nodes_list[i]
+            # Initialize list and flip the start visited flag to True
+            bft_list = []
+            bft_queue = deque([start_node])
+            while bft_queue:
+                t = bft_queue.popleft()
+                if not t.visited:
+                    t.visited = True
+                    bft_list.append(t.value)
+                    for neighb in self._neighbors(t.value):
+                        bft_queue.append(neighb)
+            return bft_list
+        else:
+            raise ValueError(u"Start node does not exist in graph")
 

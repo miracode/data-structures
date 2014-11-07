@@ -165,6 +165,22 @@ in graph")
         expected = [1, 4, 2, 3]
         assert actual == expected
 
+    def test_bft(self):
+        n1 = 1
+        n2 = 2
+        n3 = 3
+        n4 = 4
+        n5 = 5
+        g = simple_graph.Graph()
+        g.add_edge(n1, n2)
+        g.add_edge(n2, n4)
+        g.add_edge(n1, n4)
+        g.add_edge(n2, n3)
+        g.add_edge(n3, n5)
+        actual = g.breadth_first_traversal(n1)
+        expected = [1, 2, 4, 3, 5]
+        assert actual == expected
+
 
 if __name__ == '__main__':
     unittest.main()
