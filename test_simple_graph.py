@@ -64,7 +64,7 @@ class GraphTest(unittest.TestCase):
         new_node1 = simple_graph.Node('hello')
         new_node2 = simple_graph.Node('goodbye')
         g.add_node(new_node1)
-        with self.assertRaises(IndexError) as context:
+        with self.assertRaises(ValueError) as context:
             g.del_node(new_node2)
         self.assertEqual(context.exception.message,
                          u"Node does not exist in graph.")
@@ -92,7 +92,7 @@ class GraphTest(unittest.TestCase):
         new_node2 = 2
         new_node3 = simple_graph.Node('nope')
         g.add_edge(new_node1, new_node2)
-        with self.assertRaises(IndexError) as context:
+        with self.assertRaises(ValueError) as context:
             g.del_edge(new_node1, new_node3)
         self.assertEqual(context.exception.message, u"Edge does not exist \
 in graph.")
@@ -124,7 +124,7 @@ in graph.")
     def test_neighb_no_node(self):
         g = simple_graph.Graph()
         node = 'Nope'
-        with self.assertRaises(IndexError) as context:
+        with self.assertRaises(ValueError) as context:
             g.neighbors(node)
         self.assertEqual(context.exception.message, u"Node does not \
 exist in graph")
@@ -146,7 +146,7 @@ exist in graph")
         g = simple_graph.Graph()
         n1 = 'n1'
         n2 = 'n2'
-        with self.assertRaises(IndexError) as context:
+        with self.assertRaises(ValueError) as context:
             g.adjacent(n1, n2)
         self.assertEqual(context.exception.message, u"Node does not exist \
 in graph")
@@ -162,7 +162,7 @@ in graph")
         g.add_edge(n1, n4)
         g.add_edge(n2, n3)
         actual = g.depth_first_traversal(n1)
-        expected = [1, 2, 4, 2, 3, 2, 1]
+        expected = [1, 4, 2, 3]
         assert actual == expected
 
 

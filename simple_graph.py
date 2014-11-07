@@ -1,8 +1,8 @@
 
 class Node(object):
-    def __init__(self, value=None):
+    def __init__(self, value=None, visited=False):
         self.value = value
-        self.visited = False
+        self.visited = visited
 
 
 class Edge(object):
@@ -36,17 +36,21 @@ class Graph(object):
 
     def add_edge(self, n1, n2):
         """Add new edge to graph with given node values"""
-        new_edge = Edge(Node(n1), Node(n2))
-        self.edges_list.append(new_edge)
-        # If new nodes do not exists in list of nodes, add them
+        # If node already exists in graph, use, otherwise create
         try:
+            spot1 = self.nodes().index(n1)
+            node1 = self.nodes_list[spot1]
+        except ValueError:
             self.add_node(n1)
-        except ValueError:
-            pass
+            node1 = self.nodes_list[-1]
         try:
-            self.add_node(n2)
+            spot2 = self.nodes().index(n2)
+            node2 = self.nodes_list[spot2]
         except ValueError:
-            pass
+            self.add_node(n2)
+            node2 = self.nodes_list[-1]
+        new_edge = Edge(node1, node2)
+        self.edges_list.append(new_edge)
 
     def del_node(self, n):
         """Delete specified node from the graph"""
@@ -65,7 +69,7 @@ class Graph(object):
                     self.edges_list.remove(edge)
 
         else:
-            raise IndexError(u"Node does not exist in graph.")
+            raise ValueError(u"Node does not exist in graph.")
 
     def del_edge(self, n1, n2):
         """Delete edge connecting specified nodes"""
@@ -76,7 +80,7 @@ class Graph(object):
                 edge_in_graph = True
 
         if not edge_in_graph:
-            raise IndexError(u"Edge does not exist in graph.")
+            raise ValueError(u"Edge does not exist in graph.")
 
     def has_node(self, n):
         """Returns True if node is in the graph, otherwise False"""
@@ -89,7 +93,6 @@ class Graph(object):
         """Return list of node objects connected to given node"""
         neighb = []
         for edge in self.edges_list:
-            print edge, edge.n1.value, edge.n2.value, n
             if edge.n1.value == n:
                 neighb.append(edge.n2)
             if edge.n2.value == n:
@@ -99,17 +102,16 @@ class Graph(object):
     def neighbors(self, n):
         """Returns list of node values connected to given node"""
         if not self.has_node(n):
-            raise IndexError(u"Node does not exist in graph")
+            raise ValueError(u"Node does not exist in graph")
         else:
-            neighb = [node.value for node in self._neighbors(n)]
-            return neighb
+            return [node.value for node in self._neighbors(n)]
 
     def adjacent(self, n1, n2):
         """Returns True if edge connects two nodes, False if not"""
         if not self.has_node(n1):
-            raise IndexError(u"Node does not exist in graph")
+            raise ValueError(u"Node does not exist in graph")
         elif not self.has_node(n2):
-            raise IndexError(u"Node does not exist in graph")
+            raise ValueError(u"Node does not exist in graph")
         else:
             edge_in_graph = False
             for edge in self.edges():
@@ -128,14 +130,16 @@ class Graph(object):
                 start_node = self.nodes_list[i]
             # Initialize list and flip the start visited flag to True
             dft_list = []
-            start_node.visited = True
-            for neighb_node in self.neighbors(start):
-                if not neighb_node.vistied:
-                    neighb_node.visted = True
-                    dft_list.append(neighb_node.value)
-                    # recersively search down the line
-                    self.depth_first_traversal(neighb_node.value)
+            dft_stack = [start_node]
+            while dft_stack:
+                v = dft_stack.pop()
+                if not v.visited:
+                    v.visited = True
+                    dft_list.append(v.value)
+                    for neighb in self._neighbors(v.value):
+                        dft_stack.append(neighb)
+            return dft_list
 
         else:
-            raise IndexError(u"Node does not exist in graph")
+            raise ValueError(u"Node does not exist in graph")
 
