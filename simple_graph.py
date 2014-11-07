@@ -8,10 +8,11 @@ class Node(object):
 
 
 class Edge(object):
-    def __init__(self, n1=Node(), n2=Node()):
+    def __init__(self, n1=Node(), n2=Node(), weight=None):
         self.n1 = n1
         self.n2 = n2
         self.node_vals = (n1.value, n2.value)
+        self.weight = weight
 
 
 class Graph(object):
@@ -36,7 +37,7 @@ class Graph(object):
             node = Node(node_val)
             self.nodes_list.append(node)
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1, n2, weight=None):
         """Add new edge to graph with given node values"""
         # If node already exists in graph, use, otherwise create
         try:
@@ -51,7 +52,7 @@ class Graph(object):
         except ValueError:
             self.add_node(n2)
             node2 = self.nodes_list[-1]
-        new_edge = Edge(node1, node2)
+        new_edge = Edge(node1, node2, weight)
         self.edges_list.append(new_edge)
 
     def del_node(self, n):
@@ -104,22 +105,26 @@ class Graph(object):
     def neighbors(self, n):
         """Returns list of node values connected to given node"""
         if not self.has_node(n):
-            raise ValueError(u"Node does not exist in graph")
+            raise ValueError(u"Node does not exist in graph.")
         else:
             return [node.value for node in self._neighbors(n)]
 
+    def _return_edge(self, n1, n2):
+        """Returns edge object connecting n1 and n2"""
+        return_edge = False
+        if not self.has_node(n1):
+            raise ValueError(u"Node does not exist in graph.")
+        elif not self.has_node(n2):
+            raise ValueError(u"Node does not exist in graph.")
+        else:
+            for edge in self.edges_list:
+                if n1 in edge.node_vals and n2 in edge.node_vals:
+                    return_edge = edge
+        return return_edge
+
     def adjacent(self, n1, n2):
         """Returns True if edge connects two nodes, False if not"""
-        if not self.has_node(n1):
-            raise ValueError(u"Node does not exist in graph")
-        elif not self.has_node(n2):
-            raise ValueError(u"Node does not exist in graph")
-        else:
-            edge_in_graph = False
-            for edge in self.edges():
-                if n1 in edge and n2 in edge:
-                    edge_in_graph = True
-            return edge_in_graph
+        return bool(self._return_edge(n1, n2))
 
     def depth_first_traversal(self, start):
         """
@@ -145,7 +150,7 @@ class Graph(object):
                         dft_stack.append(neighb)
             return dft_list
         else:
-            raise ValueError("Start node does not exist in graph")
+            raise ValueError("Start node does not exist in graph.")
 
     def breadth_first_traversal(self, start):
         """
@@ -171,5 +176,12 @@ class Graph(object):
                         bft_queue.append(neighb)
             return bft_list
         else:
-            raise ValueError(u"Start node does not exist in graph")
+            raise ValueError(u"Start node does not exist in graph.")
 
+    def weight_edge(self, n1, n2):
+        """Return the weight of the edge connecting two nodes"""
+        # Check that edge exists
+        if self.adjacent(n1, n2):
+            return self._return_edge(n1, n2).weight
+        else:
+            raise ValueError(u"Edge does not exist in graph.")

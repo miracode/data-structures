@@ -127,7 +127,7 @@ in graph.")
         with self.assertRaises(ValueError) as context:
             g.neighbors(node)
         self.assertEqual(context.exception.message, u"Node does not \
-exist in graph")
+exist in graph.")
 
     def test_adjacent(self):
         n1 = 'n1'
@@ -149,7 +149,7 @@ exist in graph")
         with self.assertRaises(ValueError) as context:
             g.adjacent(n1, n2)
         self.assertEqual(context.exception.message, u"Node does not exist \
-in graph")
+in graph.")
 
     def test_dft(self):
         n1 = 1
@@ -180,6 +180,20 @@ in graph")
         actual = g.breadth_first_traversal(n1)
         expected = [1, 2, 4, 3, 5]
         assert actual == expected
+
+    def test_weight(self):
+        g = simple_graph.Graph()
+        g.add_edge(1, 2, 3)
+        assert g.weight_edge(1, 2) == 3
+        with self.assertRaises(ValueError) as context:
+            g.weight_edge(1, 5)
+        self.assertEqual(context.exception.message, u"Node does not exist \
+in graph.")
+        g.add_node(5)
+        with self.assertRaises(ValueError) as context:
+            g.weight_edge(1, 5)
+        self.assertEqual(context.exception.message, u"Edge does not exist \
+in graph.")
 
 
 if __name__ == '__main__':
