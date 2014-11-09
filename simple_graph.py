@@ -1,10 +1,12 @@
 from collections import deque
+from Queue import PriorityQueue
 
 
 class Node(object):
-    def __init__(self, value=None, visited=False):
+    def __init__(self, value=None, visited=False, distance=float('inf')):
         self.value = value
         self.visited = visited
+        self.distance = distance
 
 
 class Edge(object):
@@ -126,57 +128,53 @@ class Graph(object):
         """Returns True if edge connects two nodes, False if not"""
         return bool(self._return_edge(n1, n2))
 
+    def _return_node(self, value):
+        """Return node with specified value"""
+        if self.has_node(value):
+            # Find the node with the value
+            i = 0
+            start_node = self.nodes_list[0]
+            while start_node.value != value:
+                i += 1
+                start_node = self.nodes_list[i]
+            return start_node
+        else:
+            raise ValueError("Start node does not exist in graph.")
+
     def depth_first_traversal(self, start):
         """
         Return nodes that are viewed in the order of depth first traversal
         """
-        # Make sure the node exists
-        if self.has_node(start):
-            # Find the node with the start value
-            i = 0
-            start_node = self.nodes_list[0]
-            while start_node.value != start:
-                i += 1
-                start_node = self.nodes_list[i]
-            # Initialize list
-            dft_list = []
-            dft_stack = [start_node]
-            while dft_stack:
-                v = dft_stack.pop()
-                if not v.visited:
-                    v.visited = True
-                    dft_list.append(v.value)
-                    for neighb in self._neighbors(v.value):
-                        dft_stack.append(neighb)
-            return dft_list
-        else:
-            raise ValueError("Start node does not exist in graph.")
+        start_node = self._return_node(start)
+        # Initialize list
+        dft_list = []
+        dft_stack = [start_node]
+        while dft_stack:
+            v = dft_stack.pop()
+            if not v.visited:
+                v.visited = True
+                dft_list.append(v.value)
+                for neighb in self._neighbors(v.value):
+                    dft_stack.append(neighb)
+        return dft_list
 
     def breadth_first_traversal(self, start):
         """
         Return nodes that are viewed in order of breadth first traversal
         """
         # Make sure the node exists
-        if self.has_node(start):
-            # Find the node with the start value
-            i = 0
-            start_node = self.nodes_list[0]
-            while start_node.value != start:
-                i += 1
-                start_node = self.nodes_list[i]
-            # Initialize list and flip the start visited flag to True
-            bft_list = []
-            bft_queue = deque([start_node])
-            while bft_queue:
-                t = bft_queue.popleft()
-                if not t.visited:
-                    t.visited = True
-                    bft_list.append(t.value)
-                    for neighb in self._neighbors(t.value):
-                        bft_queue.append(neighb)
-            return bft_list
-        else:
-            raise ValueError(u"Start node does not exist in graph.")
+        start_node = self._return_node(start)
+        # Initialize list and flip the start visited flag to True
+        bft_list = []
+        bft_queue = deque([start_node])
+        while bft_queue:
+            t = bft_queue.popleft()
+            if not t.visited:
+                t.visited = True
+                bft_list.append(t.value)
+                for neighb in self._neighbors(t.value):
+                    bft_queue.append(neighb)
+        return bft_list
 
     def weight_edge(self, n1, n2):
         """Return the weight of the edge connecting two nodes"""
@@ -185,3 +183,9 @@ class Graph(object):
             return self._return_edge(n1, n2).weight
         else:
             raise ValueError(u"Edge does not exist in graph.")
+
+    # def dikstra(self, start):
+    #     # Find the node with the start value:
+    #     dpq = PriorityQueue()
+    #     dpq.get()
+    #     dpq.put((weight, value))
