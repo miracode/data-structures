@@ -186,26 +186,30 @@ class Graph(object):
             raise ValueError(u"Edge does not exist in graph.")
 
     def dikstra(self, start):
-        """Return nodes that are viewed in order of Dikstra's algorithm"""
+        """Return shortest path according to Dikstra's algorithm"""
         # Find the node with the start value:
         start_node = self._return_node(start)
         start_node.distance = 0
-        dpq_list = []
         # Create priority queue
         dpq = PriorityQueue()
         dpq.put((start_node.distance, start_node))
 
         while dpq.qsize() > 0:
             curr = dpq.get()[1]
-            dpq_list.append(curr.value)
             curr.visited = True
             for neighb in self._neighbors(curr.value):
                 if not neighb.visited:
                     alt = (curr.distance +
                            self.weight_edge(curr.value, neighb.value))
+                    print "alt", alt, 'neighb.distance', neighb.distance
                     if alt < neighb.distance:
                         neighb.distance = alt
                         neighb.previous = curr
                         dpq.put((neighb.distance, neighb))
-                        dpq_list.append(neighb.value)
-        return dpq_list
+        # Create list of shortest path from start to final
+        shortest = [start]
+        while curr.value != start:
+            shortest.insert(1, curr.value)
+            curr = curr.previous
+
+        return shortest

@@ -202,7 +202,7 @@ in graph.")
         g.add_edge(3, 4, 5)
         g.add_edge(2, 4, 2)
         actual = g.dikstra(1)
-        expected = [1, 2, 3, 3, 4, 2, 4, 4, 4]
+        expected = [1, 2, 4]
         assert actual == expected
 
 
