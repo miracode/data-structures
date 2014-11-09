@@ -3,10 +3,11 @@ from Queue import PriorityQueue
 
 
 class Node(object):
-    def __init__(self, value=None, visited=False, distance=float('inf')):
+    def __init__(self, value=None, visited=False):
         self.value = value
         self.visited = visited
-        self.distance = distance
+        self.distance = float('inf')
+        self.previous = None
 
 
 class Edge(object):
@@ -184,8 +185,27 @@ class Graph(object):
         else:
             raise ValueError(u"Edge does not exist in graph.")
 
-    # def dikstra(self, start):
-    #     # Find the node with the start value:
-    #     dpq = PriorityQueue()
-    #     dpq.get()
-    #     dpq.put((weight, value))
+    def dikstra(self, start):
+        """Return nodes that are viewed in order of Dikstra's algorithm"""
+        # Find the node with the start value:
+        start_node = self._return_node(start)
+        start_node.distance = 0
+        dpq_list = []
+        # Create priority queue
+        dpq = PriorityQueue()
+        dpq.put((start_node.distance, start_node))
+
+        while dpq.qsize() > 0:
+            curr = dpq.get()[1]
+            dpq_list.append(curr.value)
+            curr.visited = True
+            for neighb in self._neighbors(curr.value):
+                if not neighb.visited:
+                    alt = (curr.distance +
+                           self.weight_edge(curr.value, neighb.value))
+                    if alt < neighb.distance:
+                        neighb.distance = alt
+                        neighb.previous = curr
+                        dpq.put((neighb.distance, neighb))
+                        dpq_list.append(neighb.value)
+        return dpq_list

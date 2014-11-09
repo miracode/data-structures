@@ -195,6 +195,16 @@ in graph.")
         self.assertEqual(context.exception.message, u"Edge does not exist \
 in graph.")
 
+    def test_dikstra(self):
+        g = simple_graph.Graph()
+        g.add_edge(1, 2, 3)
+        g.add_edge(1, 3, 2)
+        g.add_edge(3, 4, 5)
+        g.add_edge(2, 4, 2)
+        actual = g.dikstra(1)
+        expected = [1, 2, 3, 3, 4, 2, 4, 4, 4]
+        assert actual == expected
+
 
 if __name__ == '__main__':
     unittest.main()
