@@ -22,6 +22,7 @@ class HashTest(unittest.TestCase):
         actual = h.hlist[4]
         expected = [('puppy', 'cute')]
         assert actual == expected
+        assert h.hlist[0] == []
 
     def test_get(self):
         h = HashTable(30)
@@ -49,5 +50,7 @@ class HashTest(unittest.TestCase):
         h = HashTable(len_words)
         for word in words:
             h.set(word, word)
+        for l in h.hlist:
+            print len(l)
         for word in words:
             assert h.get(word) == word

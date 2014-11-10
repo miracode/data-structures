@@ -7,7 +7,9 @@ class HashTable(object):
         if int(size) != size:
             raise TypeError(u"size must be an integer")
         self.size = size
-        self.hlist = [[]] * size
+        self.hlist = []
+        for i in range(size):
+            self.hlist.append([])
 
     def get(self, key):
         index = self.hash(key)
