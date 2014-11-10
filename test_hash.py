@@ -14,3 +14,10 @@ class HashTest(unittest.TestCase):
         actual = h.hash('puppy')
         expected = 4
         assert actual == expected
+
+    def test_set(self):
+        h = HashTable(30)
+        h.set('puppy', 'cute')
+        actual = h.hlist[4]
+        expected = ['cute']
+        assert actual == expected

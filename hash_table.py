@@ -15,7 +15,9 @@ class HashTable(object):
     def set(self, key, val):
         if str(key) != key:
             raise TypeError(u"key must be a string.")
-        pass
+
+        index = self.hash(key)
+        self.hlist[index].append(val)
 
     def hash(self, key):
         h_index = 0
