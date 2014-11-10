@@ -227,8 +227,8 @@ in graph.")
         g.add_edge(4, 5, 2)
         g.add_edge(5, 3, 2)
         g.add_edge(1, 6, 5)
-        actual = g.bellman_ford(1)
-        expected = [1, 2, 3, 6]
+        actual = g.bellman_ford(1)[1]
+        expected = [1, 2, 3, 1, 4]
         assert actual == expected
 
 

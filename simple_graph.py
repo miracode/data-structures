@@ -218,29 +218,26 @@ class Graph(object):
         return shortest
 
     def bellman_ford(self, start):
+        """Returns weights and predecessors of following bellman ford path"""
         start_node = self._return_node(start)
         start_node.distance = 0
-
+        weight = []
+        previous = []
         # Relax edges repeatedly
         for i in range(len(self.nodes_list) - 1):
             for edge in self.edges_list:
                 if edge.n1.distance + edge.weight < edge.n2.distance:
                     edge.n2.distance = edge.n1.distance + edge.weight
                     edge.n2.previous = edge.n1
-                    print "val", edge.n2.value, "dist", edge.n2.distance, "previous", edge.n2.previous.value
-                    curr = edge.n2
+                    weight.append(edge.n2.distance)
+                    previous.append(edge.n2.previous.value)
 
         # Check for negative-weight cycle
         for edge in self.edges_list:
             if edge.n1.distance + edge.weight < edge.n2.distance:
                 raise ValueError("Graph contains negative-weight cycle")
 
-        # Create list of shortest path from start to final
-        shortest = [start]
-        while curr.value != start:
-            shortest.insert(1, curr.value)
-            curr = curr.previous
-        return shortest
+        return weight, previous
 
     # def _h_cost(self, start, finish):
     # """Return estimated heuristic cost from start to finish"""
