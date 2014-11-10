@@ -41,3 +41,13 @@ class HashTest(unittest.TestCase):
         actual2 = h.get('w')
         expected2 = 'W'
         assert actual2 == expected2
+
+    def test_many(self):
+        words = [line.strip() for line in open('/usr/share/dict/words')]
+        words = words[:300]
+        len_words = len(words)
+        h = HashTable(len_words)
+        for word in words:
+            h.set(word, word)
+        for word in words:
+            assert h.get(word) == word
