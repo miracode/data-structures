@@ -30,8 +30,14 @@ class HashTest(unittest.TestCase):
         expected = 'cute'
         assert actual == expected
 
-    # def test_get_conflict(self):
-    #     h = HashTable(30)
-    #     h.set('hi', 'HI')
-    #     h.set('x', 'X')
-
+    def test_get_conflict(self):
+        h = HashTable(30)
+        h.set('hi', 'HI')
+        h.set('w', 'W')
+        assert h.hash('w') == h.hash('hi')
+        actual1 = h.get('hi')
+        expected1 = 'HI'
+        assert actual1 == expected1
+        actual2 = h.get('w')
+        expected2 = 'W'
+        assert actual2 == expected2
