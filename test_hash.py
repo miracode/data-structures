@@ -22,3 +22,16 @@ class HashTest(unittest.TestCase):
         actual = h.hlist[4]
         expected = [('puppy', 'cute')]
         assert actual == expected
+
+    def test_get(self):
+        h = HashTable(30)
+        h.set('puppy', 'cute')
+        actual = h.get('puppy')
+        expected = 'cute'
+        assert actual == expected
+
+    # def test_get_conflict(self):
+    #     h = HashTable(30)
+    #     h.set('hi', 'HI')
+    #     h.set('x', 'X')
+
