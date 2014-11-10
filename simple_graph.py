@@ -6,8 +6,12 @@ class Node(object):
     def __init__(self, value=None, visited=False):
         self.value = value
         self.visited = visited
+        # for dikstra
         self.distance = float('inf')
-        self.previous = None
+        self.previous = None  # and a-star
+        # for a-star
+        # self.gscore = 0
+        # self.fscore = 0
 
 
 class Edge(object):
@@ -211,5 +215,59 @@ class Graph(object):
         while curr.value != start:
             shortest.insert(1, curr.value)
             curr = curr.previous
-
         return shortest
+
+    def bellman_ford(self, start):
+        start_node = self._return_node(start)
+        start_node.distance = 0
+
+        # Relax edges repeatedly
+        for i in range(len(self.nodes_list) - 1):
+            for edge in self.edges_list:
+                if edge.n1.distance + edge.weight < edge.n2.distance:
+                    edge.n2.distance = edge.n1.distance + edge.weight
+                    edge.n2.previous = edge.n1
+                    print "val", edge.n2.value, "dist", edge.n2.distance, "previous", edge.n2.previous.value
+                    curr = edge.n2
+
+        # Check for negative-weight cycle
+        for edge in self.edges_list:
+            if edge.n1.distance + edge.weight < edge.n2.distance:
+                raise ValueError("Graph contains negative-weight cycle")
+
+        # Create list of shortest path from start to final
+        shortest = [start]
+        while curr.value != start:
+            shortest.insert(1, curr.value)
+            curr = curr.previous
+        return shortest
+
+    # def _h_cost(self, start, finish):
+    # """Return estimated heuristic cost from start to finish"""
+    # cant figure one out
+
+    # def a_star(self, start, finish):
+    #     start_node = self._return_node(start)
+    #     closedlist = []
+    #     openlist = [start_node]
+    #     camefrom = []
+
+    #     while len(openlist) > 0:
+    #         curr = min([node.fscore for node in openlist])
+    #         if curr.value == finish:
+    #             break
+
+    #         openlist.remove(curr)
+    #         closedlist.append(curr)
+    #         for neighb in self._neighbors(curr.value):
+    #             if neighb in closedlist:
+    #                 tent_g_score = (curr.gscore +
+    #                                 self.weight_edge(curr.value, neighb.value))
+    #                 if neighb not in openlist or tent_g_score < neighb.gscore:
+    #                     neighb.previous = curr
+    #                     neighb.gscore = tent_g_score
+    #                     neighb.fscore = (neighb.gscore +
+    #                                      self._h_cost(neighb, finish))
+
+
+

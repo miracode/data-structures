@@ -218,6 +218,19 @@ in graph.")
         expected = [1, 2, 3, 6]
         assert actual == expected
 
+    def test_bf(self):
+        g = simple_graph.Graph()
+        g.add_edge(1, 2, 1)
+        g.add_edge(2, 3, 1)
+        g.add_edge(3, 6, 2)
+        g.add_edge(1, 4, 2)
+        g.add_edge(4, 5, 2)
+        g.add_edge(5, 3, 2)
+        g.add_edge(1, 6, 5)
+        actual = g.bellman_ford(1)
+        expected = [1, 2, 3, 6]
+        assert actual == expected
+
 
 if __name__ == '__main__':
     unittest.main()
