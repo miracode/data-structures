@@ -3,8 +3,11 @@ from Queue import Queue
 
 def radix_sort(array):
     """
-    Sorts an array of numbers of the same length using the least signficant
-    digit radix algorithm.
+    Sorts an array of numbers using the least signficant digit radix algorithm.
+
+    Best & Worst Case: O(kn)
+    Sort each number into buckets k times.
+
     """
     # Initialize a dictionary of queues for number buckets
     queue_dict = {'0': Queue(),
@@ -18,26 +21,23 @@ def radix_sort(array):
                   '8': Queue(),
                   '9': Queue()
                   }
-    # i = len(str(array[0])) - 1
+    # determine k, the number of passes needed
+    k = max([len(str(elem)) for elem in array])
     i = 1
-    # run loop while is less than last element's length
-    while i <= len(str(array[-1])):
-        print array
+    # run loop while is less than k
+    while i <= k:
         for elem in array:
             # place elem in bucket current digit
             try:
                 queue_dict[str(elem)[i * -1]].put(elem)
             except IndexError:
                 queue_dict['0'].put(elem)
-                print i
-        # update array to be ordered array
+        # update array to be ordered array by dequeueing buckets
         array = []
         for key in range(10):
             while queue_dict[str(key)].qsize():
                 array.append(queue_dict[str(key)].get())
-        print array
         i += 1
-        print i
 
     return array
 
@@ -51,4 +51,3 @@ if __name__ == '__main__':
     array3 = [500, 40, 11, 2]
     assert radix_sort(array3) == [2, 11, 40, 500]
     print "tests pass"
-    
