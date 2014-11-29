@@ -42,12 +42,16 @@ class BSTTest(unittest.TestCase):
                   test_bst.right.parent.value, test_bst.left.parent.value)
         self.assertEquals(expected, actual)
 
-    def test_insert_three2(self):
+    def test_insert_three2_self_balance(self):
         #     12
         #    /
         #   9
         #  /
         # 7
+        # SELF BALANCE =>
+        #   9
+        #  / \
+        # 7   12
         first_val = 12
         second_val = 9
         third_val = 7
@@ -55,18 +59,12 @@ class BSTTest(unittest.TestCase):
         test_bst.insert(first_val)
         test_bst.insert(second_val)
         test_bst.insert(third_val)
-        expected1 = (12, None)
-        actual1 = (test_bst.value, test_bst.right)
-        self.assertEquals(expected1, actual1)
-        expected2 = (9, None, 12)
-        actual2 = (test_bst.left.value, test_bst.left.right,
-                   test_bst.left.parent.value)
-        self.assertEquals(expected2, actual2)
-        expected3 = (7, None, None, 9)
-        actual3 = (test_bst.left.left.value, test_bst.left.left.left,
-                   test_bst.left.left.right,
-                   test_bst.left.left.parent.value)
-        self.assertEquals(expected3, actual3)
+        expected = (9, 7, None, None, 12, None, None, 9, 9)
+        actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
+                  test_bst.left.right, test_bst.right.value,
+                  test_bst.right.left, test_bst.right.right,
+                  test_bst.right.parent.value, test_bst.left.parent.value)
+        self.assertEquals(actual, expected)
 
     def test_insert_many(self):
         #         12
