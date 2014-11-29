@@ -25,6 +25,9 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(expected, actual)
 
     def test_insert_three1(self):
+        #  9
+        # / \
+        #7   12
         first_val = 9
         second_val = 7
         third_val = 12
@@ -40,6 +43,11 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(expected, actual)
 
     def test_insert_three2(self):
+        #     12
+        #    /
+        #   9
+        #  /
+        # 7
         first_val = 12
         second_val = 9
         third_val = 7
@@ -61,6 +69,13 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(expected3, actual3)
 
     def test_insert_many(self):
+        #         12
+        #        /  \
+        #       2    14
+        #        \
+        #         7
+        #          \
+        #           9
         vals = [12, 2, 7, 14, 9]
         test_bst = bst.BinarySearchTree()
         for val in vals:
