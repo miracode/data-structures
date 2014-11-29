@@ -15,21 +15,34 @@ class BinarySearchTree(object):
 
     def insert(self, val):
         """Insert a value into the BST"""
-        leaf = BinarySearchTree(val)
-        leaf.parent = self
+
+        # if the BST is empty, place value at top.
         if not self.value:
             self.value = val
 
-        if val < self.value:
-            if not self.left:
-                self.left = leaf
-            else:
-                self.left.insert(val)
-        elif val > self.value:
-            if not self.right:
-                self.right = leaf
-            else:
-                self.right.insert(val)
+        else:
+            leaf = BinarySearchTree(val)
+            leaf.parent = self
+
+            if val < self.value:
+                # if the leaf is None, place new leaf there
+                if not self.left:
+                    self.left = leaf
+                # otherwise, recursively use insert to place in left BST
+                else:
+                    self.left.insert(val)
+
+            elif val > self.value:
+                if not self.right:
+                    self.right = leaf
+                else:
+                    self.right.insert(val)
+
+            # balance bst around leaf
+            # while leaf.parent:
+            #     if leaf == leaf.parent.left:
+            #         if
+
 
     def contains(self, val):
         """Return True if BST contains value, otherwise False"""
@@ -84,18 +97,20 @@ class BinarySearchTree(object):
         count += count_max
         return count
 
-    def balance(self):
+    def balance(self, top=None):
         """Return 0 for a balanced tree, otherwise a positive or negative
         integer indicating the imbalance to the left or right, respectively"""
+        if not top:
+            top = self
         count_left = 0
         count_right = 0
         # current value
-        if self.value:
-            if self.left:
-                count_left += (1 - self.left.balance())
+        if top.value:
+            if top.left:
+                count_left += (1 - top.left.balance())
             # right node
-            if self.right:
-                count_right += 1 + self.right.balance()
+            if top.right:
+                count_right += 1 + top.right.balance()
         diff = count_right - count_left
         return diff
 
