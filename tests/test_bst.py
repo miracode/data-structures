@@ -67,6 +67,19 @@ class BSTTest(unittest.TestCase):
                   test_bst.right.parent.value, test_bst.left.parent.value)
         self.assertEquals(actual, expected)
 
+    def test_update_balance(self):
+        first_val = 12
+        second_val = 9
+        third_val = 7
+        test_bst = bst.BinarySearchTree()
+        test_bst.insert(first_val)
+        test_bst.insert(second_val)
+        test_bst.insert(third_val)
+        actual = (test_bst.balance_factor, test_bst.left.balance_factor,
+                  test_bst.left.left.balance_factor)
+        expected = (2, 1, 0)
+        self.assertEquals(actual, expected)
+
     # def test_insert_many(self):
     #     #         12
     #     #        /  \

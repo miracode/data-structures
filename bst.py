@@ -26,10 +26,11 @@ class BinarySearchTree(object):
             leaf.parent = self
 
             if val < self.value:
-                # if the leaf is None, place new leaf there & update balance
+                # if the leaf is None, place new leaf there
+                # and update balance factor of parent
                 if not self.left:
                     self.left = leaf
-                    # self._update_balance(self.left)
+                    self._update_balance(self.left)
                 # otherwise, recursively use insert to place in left BST
                 else:
                     self.left.insert(val)
@@ -37,38 +38,43 @@ class BinarySearchTree(object):
             elif val > self.value:
                 if not self.right:
                     self.right = leaf
-                    # self._update_balance(self.right)
-
+                    self._update_balance(self.right)
                 else:
                     self.right.insert(val)
 
     def _update_balance(self, node):
-        if node.balance_factor != 0:
-            self._rebalance(node)
-        elif node.parent:
+        # if node.balance_factor != 0:
+        #     self._rebalance(node)
+        if node.parent:
+            # if new leaf is a left child, parent gets +1 bal factor
             if node == node.parent.left:
                 node.parent.balance_factor += 1
+            # if new leaf is right child, parent gets -1 bal factor
             elif node == node.parent.right:
                 node.parent.balance_factor -= 1
 
+            # if the parent is now unbalanced, update grandparent bal factor
             if node.parent.balance_factor != 0:
                 self._update_balance(node.parent)
 
-    def _rotate_left(self, node):
-        new_root = node.right
-        node.right = new_root.left
-        temp_parent = node.parent
-        node.parent = temp_parent.parent
-        node.right = temp_parent
-        node.right.parent = node
-        node.right.left = None
+    # def _rebalance(self, node):
+    #     pass
 
-    def _rotate_right(self, node):
-        temp_parent = node.parent
-        node.parent = temp_parent.parent
-        node.left = temp_parent
-        node.left.parent = node
-        node.left.right = None
+    # def _rotate_left(self, node):
+    #     new_root = node.right
+    #     node.right = new_root.left
+    #     temp_parent = node.parent
+    #     node.parent = temp_parent.parent
+    #     node.right = temp_parent
+    #     node.right.parent = node
+    #     node.right.left = None
+
+    # def _rotate_right(self, node):
+    #     temp_parent = node.parent
+    #     node.parent = temp_parent.parent
+    #     node.left = temp_parent
+    #     node.left.parent = node
+    #     node.left.right = None
 
 
     def contains(self, val):
@@ -139,17 +145,6 @@ class BinarySearchTree(object):
         if self.right:
             right_depth = self.right.depth()
 
-        print left_depth, right_depth
-        # count_left = 0
-        # count_right = 0
-        # # current value
-        # if self.value:
-        #     if self.left:
-        #         count_left += (1 - self.left.balance())
-        #     # right node
-        #     if self.right:
-        #         count_right += 1 + self.right.balance()
-        # diff = count_right - count_left
         return (left_depth - right_depth)
 
     def delete(self, val, parent_side=None):
