@@ -44,23 +44,23 @@ class BSTTest(unittest.TestCase):
 
     def test_insert_three2_self_balance(self):
         #     12
-        #    /
-        #   9
-        #  /
-        # 7
+        #      \
+        #       13
+        #        \
+        #         14
         # SELF BALANCE =>
-        #   9
+        #   13
         #  / \
-        # 7   12
+        # 12  14
         first_val = 12
-        second_val = 9
-        third_val = 7
+        second_val = 13
+        third_val = 14
         test_bst = bst.BinarySearchTree()
         test_bst.insert(first_val)
         test_bst.insert(second_val)
         test_bst.insert(third_val)
         print test_bst.value, test_bst.left.value, test_bst.left.left
-        expected = (9, 7, None, None, 12, None, None, 9, 9)
+        expected = (13, 12, None, None, 14, None, None, 13, 13)
         actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
                   test_bst.left.right, test_bst.right.value,
                   test_bst.right.left, test_bst.right.right,
