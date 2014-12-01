@@ -61,7 +61,6 @@ class BinarySearchTree(object):
     #     pass
 
     def _rotate_left(self, root_node):
-        print "rotate_left"
         """Rotate left by changing values and pointers."""
         ## make root_node the left child of its right child
         # make a new node for new left child
@@ -99,7 +98,6 @@ class BinarySearchTree(object):
         root_node.balance_factor += (1 + max(root_node.left.balance_factor, 0))
 
     def _rotate_right(self, root_node):
-        print "rotate right"
         """Rotate right by changing values and pointers."""
         ## make root_node the left child of its right child
         # make a new node for new right child
@@ -229,7 +227,6 @@ class BinarySearchTree(object):
                 if not self.parent:
                     self.value = None
                 else:
-                    print self.parent.balance_factor
                     if parent_side == 'left':
                         self.parent.left = None
                         self.parent.balance_factor -= 1
@@ -275,21 +272,12 @@ class BinarySearchTree(object):
                         self.right.parent = self
                 else:
                     if parent_side == 'left':
-                        print self.parent.balance_factor
-                        print self.parent.left.depth()
-                        print self.parent.right.depth()
-                        print self.parent.right.value
-                        print self.parent.right.right.value
-                        print self.contains(25)
+                         self.parent.balance_factor
                         self.parent.left = self.left
                         self.parent.balance_factor -= 1
-                        print "parent and bal fact"
-                        print self.parent.value, self.parent.balance_factor
                     elif parent_side == 'right':
                         self.parent.right = self.left
                         self.parent.balance_factor += 1
-                        print "parent and bal fact"
-                        print self.parent.value, self.parent.balance_factor
                     self._update_balance(self.parent)
             # otherwise, node has two children
             else:
@@ -297,7 +285,6 @@ class BinarySearchTree(object):
                 #### determine max left value
                 repl_val = self._max_left_val(self.left)
                 #### delete max left value (no children)
-                print self.value
                 self.delete(repl_val, rotate=False)
                 #### replace current val with max val
                 self.value = repl_val
