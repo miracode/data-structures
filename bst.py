@@ -221,23 +221,48 @@ class BinarySearchTree(object):
 
         elif val == self.value:
             # delete node
-            if self.parent is None:
-                self.value = None
-            elif not self.left and not self.right:
-                if parent_side == 'left':
+            # if there are no children, change the parent's child to be None
+            # (node will have no pointers and will be garbage collected)
+            if not self.left and not self.right:
+                if not self.parent:
+                    self.value = None
+                elif parent_side == 'left':
                     self.parent.left = None
                 elif parent_side == 'right':
                     self.parent.right = None
+
+            # otherwise
+            # if the child is the right one:
             elif not self.left:
-                if parent_side == 'left':
+                if not self.parent:
+                    self.value = self.right.value
+                    self.left = self.right.left
+                    self.right = self.right.right
+                    self.balance_factor = self.right.balance_factor
+                    if self.left:
+                        self.left.parent = self
+                    if self.right:
+                        self.right.parent = self
+                elif parent_side == 'left':
                     self.parent.left = self.right
                 elif parent_side == 'right':
                     self.parent.right = self.right
+            # otherwise, if child is the left one:
             elif not self.right:
-                if parent_side == 'left':
+                if not self.parent:
+                    self.value = self.left.value
+                    self.left = self.left.left
+                    self.right = self.left.right
+                    self.balance_factor = self.left.balance_factor
+                    if self.left:
+                        self.left.parent = self
+                    if self.right:
+                        self.right.parent = self
+                elif parent_side == 'left':
                     self.parent.left = self.left
                 elif parent_side == 'right':
                     self.parent.right = self.left
+            # otherwise, node has two children
             else:
                 # replace with largest of left node's children
                 #### determine max left value
