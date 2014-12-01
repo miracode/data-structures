@@ -114,40 +114,6 @@ class BSTTest(unittest.TestCase):
         self.assertEquals(10, test_bst.value)
         self.assertEquals(8, test_bst.left.left.value)
 
-    # def test_update_balance(self):
-    #     first_val = 12
-    #     second_val = 9
-    #     third_val = 7
-    #     test_bst = bst.BinarySearchTree()
-    #     test_bst.insert(first_val)
-    #     test_bst.insert(second_val)
-    #     test_bst.insert(third_val)
-    #     actual = (test_bst.balance_factor, test_bst.left.balance_factor,
-    #               test_bst.left.left.balance_factor)
-    #     expected = (2, 1, 0)
-    #     self.assertEquals(actual, expected)
-
-    # def test_insert_many(self):
-    #     #         12
-    #     #        /  \
-    #     #       2    14
-    #     #        \
-    #     #         7
-    #     #          \
-    #     #           9
-    #     vals = [12, 2, 7, 14, 9]
-    #     test_bst = bst.BinarySearchTree()
-    #     for val in vals:
-    #         test_bst.insert(val)
-    #     expected = (12, 2, None, 7, 9, None, None, 14, None, None)
-    #     actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
-    #               test_bst.left.right.value, test_bst.left.right.right.value,
-    #               test_bst.left.right.right.left,
-    #               test_bst.left.right.right.right,
-    #               test_bst.right.value, test_bst.right.left,
-    #               test_bst.right.right)
-    #     self.assertEquals(actual, expected)
-
     def test_contain_small_tree(self):
         vals = [12, 9, 14]
         test_bst = bst.BinarySearchTree()
@@ -238,83 +204,80 @@ class BSTTest(unittest.TestCase):
             test_bst.insert(val)
         bal = test_bst.balance()
         self.assertEquals(bal, 1)
-        # test_bst.insert(5)
-        # #    12
-        # #    /
-        # #   9
-        # #  /
-        # # 5
-        # bal = test_bst.balance()
-        # self.assertEquals(bal, 2)
-        # vals = [15, 23, 14, 50]
-        # #    12
-        # #    / \
-        # #   9   15
-        # #  /   / \
-        # # 5   14  23
-        # #          \
-        # #           50
-        # for val in vals:
-        #     test_bst.insert(val)
-        # bal = test_bst.balance()
-        # self.assertEquals(bal, -1)
-        # test_bst2 = bst.BinarySearchTree()
-        # vals = [15, 23, 21, 50]
-        # for val in vals:
-        #     test_bst2.insert(val)
-        # # 15
-        # #  \
-        # #   23
-        # #  / \
-        # # 21  50
-        # bal = test_bst2.balance()
-        # self.assertEquals(bal, -2)
 
-    def test_delete_node_no_children(self):
-        test_bst = bst.BinarySearchTree()
-        val = 12
-        test_bst.insert(val)
-        test_bst.delete(val)
-        assert test_bst.value is None
-        test_bst2 = bst.BinarySearchTree()
-        vals = [12, 9]
-        for val in vals:
-            test_bst2.insert(val)
-        test_bst2.delete(9)
-        assert test_bst2.left is None
-        vals = [9, 14, 15]
-        for val in vals:
-            test_bst2.insert(val)
-        test_bst2.delete(15)
-        assert test_bst2.right.right is None
-        assert test_bst2.contains(15) is False
+    # def test_delete_node_no_children(self):
+    #     test_bst = bst.BinarySearchTree()
+    #     val = 12
+    #     test_bst.insert(val)
+    #     test_bst.delete(val)
+    #     assert test_bst.value is None
+    #     test_bst2 = bst.BinarySearchTree()
+    #     vals = [12, 9]
+    #     for val in vals:
+    #         test_bst2.insert(val)
+    #     test_bst2.delete(9)
+    #     assert test_bst2.left is None
+    #     vals = [9, 14, 15]
+    #     for val in vals:
+    #         test_bst2.insert(val)
+    #     test_bst2.delete(15)
+    #     assert test_bst2.right.right is None
+    #     assert test_bst2.contains(15) is False
 
-    def test_delete_node_one_child(self):
+    # def test_delete_node_one_child(self):
+    #     test_bst = bst.BinarySearchTree()
+    #     vals = [12, 9, 2]
+    #     for val in vals:
+    #         test_bst.insert(val)
+    #     test_bst.delete(9)
+    #     assert test_bst.contains(9) is False
+    #     test_bst.delete(12)
+    #     self.assertEquals(test_bst.value, 2)
+
+    # def test_delete_node_two_children(self):
+    #     test_bst = bst.BinarySearchTree()
+    #     vals = [9, 12, 2]
+    #     for val in vals:
+    #         test_bst.insert(val)
+    #     test_bst.delete(9)
+    #     assert test_bst.contains(9) is False
+    #     assert test_bst.value == 2
+    #     assert test_bst.left is None
+    #     assert test_bst.right.value == 12
+
+    # def test_delete_node_two_children2(self):
+
+    #     #        20
+    #     #         \
+    #     #          40
+    #     #         /  \
+    #     #            60
+    #     # REBAL >
+    #     #       40
+    #     #      /  \
+    #     #     20   60
+    #     #      \    / \
+    #     #      30  50  70
+    #     #      / \
+    #     #     25  35
+
+    #     test_bst = bst.BinarySearchTree()
+    #     vals = [20, 40, 60, 30, 50, 70, 25, 35]
+    #     for val in vals:
+    #         test_bst.insert(val)
+    #     test_bst.delete(40)
+    #     assert test_bst.contains(40) is False
+    #     assert test_bst.value == 35
+
+    def test_delete_rebalance(self):
+        #          20
+        #         /  \
+        #        15   25
+        #       /
+        #      10
+        vals = [20, 15, 25, 10]
         test_bst = bst.BinarySearchTree()
-        vals = [12, 9, 2]
         for val in vals:
             test_bst.insert(val)
-        test_bst.delete(9)
-        assert test_bst.contains(9) is False
-        test_bst.delete(12)
-        self.assertEquals(test_bst.value, 2)
-
-    def test_delete_node_two_children(self):
-        test_bst = bst.BinarySearchTree()
-        vals = [9, 12, 2]
-        for val in vals:
-            test_bst.insert(val)
-        test_bst.delete(9)
-        assert test_bst.contains(9) is False
-        assert test_bst.value == 2
-        assert test_bst.left is None
-        assert test_bst.right.value == 12
-
-    def test_delete_node_two_children2(self):
-        test_bst = bst.BinarySearchTree()
-        vals = [20, 40, 60, 30, 50, 70, 25, 35]
-        for val in vals:
-            test_bst.insert(val)
-        test_bst.delete(40)
-        assert test_bst.contains(40) is False
-        # assert test_bst.right.value == 35
+        test_bst.delete(25)
+        self.assertEquals(15, test_bst.value)

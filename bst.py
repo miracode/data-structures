@@ -226,10 +226,15 @@ class BinarySearchTree(object):
             if not self.left and not self.right:
                 if not self.parent:
                     self.value = None
-                elif parent_side == 'left':
-                    self.parent.left = None
-                elif parent_side == 'right':
-                    self.parent.right = None
+                else:
+                    print self.parent.balance_factor
+                    if parent_side == 'left':
+                        self.parent.left = None
+                        self.parent.balance_factor -= 1
+                    elif parent_side == 'right':
+                        self.parent.right = None
+                        self.parent.balance_factor += 1
+                    self._update_balance(self.parent)
 
             # otherwise
             # if the child is the right one:
