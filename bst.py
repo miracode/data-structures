@@ -61,6 +61,7 @@ class BinarySearchTree(object):
     #     pass
 
     def _rotate_left(self, root_node):
+        print "rotate_left"
         """Rotate left by changing values and pointers."""
         ## make root_node the left child of its right child
         # make a new node for new left child
@@ -98,6 +99,7 @@ class BinarySearchTree(object):
         root_node.balance_factor += (1 + max(root_node.left.balance_factor, 0))
 
     def _rotate_right(self, root_node):
+        print "rotate right"
         """Rotate right by changing values and pointers."""
         ## make root_node the left child of its right child
         # make a new node for new right child
@@ -248,10 +250,15 @@ class BinarySearchTree(object):
                         self.left.parent = self
                     if self.right:
                         self.right.parent = self
-                elif parent_side == 'left':
-                    self.parent.left = self.right
-                elif parent_side == 'right':
-                    self.parent.right = self.right
+                    # no need to rebalance, subtree should be balanced
+                else:
+                    if parent_side == 'left':
+                        self.parent.left = self.right
+                        self.parent.balance_factor -= 1
+                    elif parent_side == 'right':
+                        self.parent.right = self.right
+                        self.parent.balance_factor += 1
+                    self._update_balance(self.parent)
             # otherwise, if child is the left one:
             elif not self.right:
                 if not self.parent:
@@ -263,10 +270,22 @@ class BinarySearchTree(object):
                         self.left.parent = self
                     if self.right:
                         self.right.parent = self
-                elif parent_side == 'left':
-                    self.parent.left = self.left
-                elif parent_side == 'right':
-                    self.parent.right = self.left
+                else:
+                    if parent_side == 'left':
+                        print self.parent.balance_factor
+                        print self.parent.left.depth()
+                        print self.parent.right.depth()
+                        print self.parent.right.value
+                        print self.parent.right.right.value
+                        print self.contains(25)
+                        self.parent.left = self.left
+                        self.parent.balance_factor -= 1
+                        print "parent and bal fact"
+                        print self.parent.value, self.parent.balance_factor
+                    elif parent_side == 'right':
+                        self.parent.right = self.left
+                        self.parent.balance_factor += 1
+                    self._update_balance(self.parent)
             # otherwise, node has two children
             else:
                 # replace with largest of left node's children

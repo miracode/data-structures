@@ -269,7 +269,7 @@ class BSTTest(unittest.TestCase):
     #     assert test_bst.contains(40) is False
     #     assert test_bst.value == 35
 
-    def test_delete_rebalance(self):
+    def test_delete_rebalance_no_children(self):
         #          20
         #         /  \
         #        15   25
@@ -281,3 +281,25 @@ class BSTTest(unittest.TestCase):
             test_bst.insert(val)
         test_bst.delete(25)
         self.assertEquals(15, test_bst.value)
+
+    def test_delete_rebalance_one_child(self):
+        #          20
+        #         /  \
+        #        15   25
+        #       /     /\
+        #      10    24 26
+        #                \
+        #                 27
+        vals = [20, 15, 25, 10, 26, 24, 27]
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            print val
+            test_bst.insert(val)
+        self.assertTrue(test_bst.contains(25))
+        test_bst.delete(15)
+        #         25
+        #        /  \
+        #       20  26
+        #       /     \
+        #      10     27
+        self.assertEquals(25, test_bst.value)
