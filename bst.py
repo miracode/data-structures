@@ -272,7 +272,7 @@ class BinarySearchTree(object):
                         self.right.parent = self
                 else:
                     if parent_side == 'left':
-                         self.parent.balance_factor
+                        self.parent.balance_factor
                         self.parent.left = self.left
                         self.parent.balance_factor -= 1
                     elif parent_side == 'right':
