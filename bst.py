@@ -217,7 +217,7 @@ class BinarySearchTree(object):
 
         return (left_depth - right_depth)
 
-    def delete(self, val, parent_side=None):
+    def delete(self, val, parent_side=None, rotate=True):
         if not self.value:
             return ValueError("%s not in emtpy BST" % (val, ))
 
@@ -236,7 +236,9 @@ class BinarySearchTree(object):
                     elif parent_side == 'right':
                         self.parent.right = None
                         self.parent.balance_factor += 1
-                    self._update_balance(self.parent)
+
+                    if rotate:
+                        self._update_balance(self.parent)
 
             # otherwise
             # if the child is the right one:
@@ -258,7 +260,8 @@ class BinarySearchTree(object):
                     elif parent_side == 'right':
                         self.parent.right = self.right
                         self.parent.balance_factor += 1
-                    self._update_balance(self.parent)
+                    if rotate:
+                        self._update_balance(self.parent)
             # otherwise, if child is the left one:
             elif not self.right:
                 if not self.parent:
@@ -285,6 +288,8 @@ class BinarySearchTree(object):
                     elif parent_side == 'right':
                         self.parent.right = self.left
                         self.parent.balance_factor += 1
+                        print "parent and bal fact"
+                        print self.parent.value, self.parent.balance_factor
                     self._update_balance(self.parent)
             # otherwise, node has two children
             else:
@@ -292,9 +297,12 @@ class BinarySearchTree(object):
                 #### determine max left value
                 repl_val = self._max_left_val(self.left)
                 #### delete max left value (no children)
-                self.delete(repl_val)
+                print self.value
+                self.delete(repl_val, rotate=False)
                 #### replace current val with max val
                 self.value = repl_val
+                self._update_balance(self)
+
 
         # Otherwise, check subsequent BTs
         elif val < self.value:
@@ -302,12 +310,12 @@ class BinarySearchTree(object):
                 return ValueError("%s not in BST" % (val, ))
             else:
                 # keep checking
-                self.left.delete(val, parent_side='left')
+                self.left.delete(val, parent_side='left', rotate=rotate)
         elif val > self.value:
             if not self.right:
                 return ValueError("%s not in BST" % (val, ))
             else:
-                self.right.delete(val, parent_side='right')
+                self.right.delete(val, parent_side='right', rotate=rotate)
         else:
             return ValueError("%s not in BST" % (val, ))
 
