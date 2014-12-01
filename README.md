@@ -4,18 +4,19 @@ data-structures
 
 # Binary Heap
 ### Implementation of a min or max binary heap (default is max)
+Resources: [Wikipedia - Binary Heap - Max-Heapify Pop Algorithm](http://en.wikipedia.org/wiki/Binary_heap#Delete)
 
 BinaryHeap([iterable=(), btype='max' or 'min'])
 
 Functions:
 * insert(val) - Insert a value to add to the heap which places it in the correct location
 * pop() - Return and remove the top-most value of the heap
-  - (Pop algorithm logic from [Wikipedia - Binary Heap - Max-Heapify](http://en.wikipedia.org/wiki/Binary_heap#Delete))
 
 
 # Binary Search Tree
 ### Implementation of a recursive AVL binary search tree where each node is also a binary search tree.
 #### Insertions and deletions will cause the tree to check whether it is currently balanced and rotate if necessary to rebalance.
+Resources: [Interactive Python](http://interactivepython.org/courselib/static/pythonds/Trees/balanced.html), [Wikipedia](http://en.wikipedia.org/wiki/AVL_tree)
 
 BinarySearchTree([value=None])
 
@@ -113,6 +114,7 @@ radix_sort(array)
 
 # Simple Graph
 ### Make a simple graph with nodes and edges connecting two nodes
+Resources: [Bellman-Ford](http://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm#Algorithm), [Dikstra's algorithm](http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm)
 
 Graph()
 
@@ -129,8 +131,8 @@ Functions:
 * depth_first_traversal(start) - Returns traversal path from start to finish by searching depth first
 * breadth_first_traversal(start) - Return traversal path from start to finish by searching breadth first
 * weight_edge(n1, n2) - Return the weight of the edge connecting given nodes
-* dikstra(start) - Return shortest path by following [Dikstra's algorithm](http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#Algorithm)
-* bellman_ford(start) - Return weight and predecessors of following [Bellman-Ford](http://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm#Algorithm) path
+* dikstra(start) - Return shortest path by following Dikstra's algorithm
+* bellman_ford(start) - Return weight and predecessors of following a Bellman-Ford path
 
 # Stack
 ### Create a stack - last on, first off
