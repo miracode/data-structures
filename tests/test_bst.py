@@ -67,6 +67,53 @@ class BSTTest(unittest.TestCase):
                   test_bst.right.parent.value, test_bst.left.parent.value)
         self.assertEquals(actual, expected)
 
+    def test_insert_three3_self_balance(self):
+        #     12
+        #     /
+        #    11
+        #    /
+        #   10
+        # SELF BALANCE =>
+        #   11
+        #  / \
+        # 10  12
+        first_val = 12
+        second_val = 11
+        third_val = 10
+        test_bst = bst.BinarySearchTree()
+        test_bst.insert(first_val)
+        test_bst.insert(second_val)
+        test_bst.insert(third_val)
+        print test_bst.value, test_bst.left.value, test_bst.left.left
+        expected = (11, 10, None, None, 12, None, None, 11, 11)
+        actual = (test_bst.value, test_bst.left.value, test_bst.left.left,
+                  test_bst.left.right, test_bst.right.value,
+                  test_bst.right.left, test_bst.right.right,
+                  test_bst.right.parent.value, test_bst.left.parent.value)
+        self.assertEquals(actual, expected)
+
+    def test_insert_many_self_balance(self):
+        #     12
+        #    / \
+        #   10   13
+        #   /\
+        #  9 11
+        # /
+        # 8
+        # SELF BALANCE =>
+        #     10
+        #    / \
+        #   9   12
+        #  /   / \
+        # 8   11  13
+        vals = (12, 13, 10, 11, 9, 8)
+        test_bst = bst.BinarySearchTree()
+        for val in vals:
+            test_bst.insert(val)
+        self.assertEquals(3, test_bst.depth())
+        self.assertEquals(10, test_bst.value)
+        self.assertEquals(8, test_bst.left.left.value)
+
     # def test_update_balance(self):
     #     first_val = 12
     #     second_val = 9
