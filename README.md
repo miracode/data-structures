@@ -14,17 +14,18 @@ Functions:
 
 
 # Binary Search Tree
-### Implementation of a recursive binary search tree where each node is also a binary search tree
+### Implementation of a recursive AVL binary search tree where each node is also a binary search tree.
+#### Insertions and deletions will cause the tree to check whether it is currently balanced and rotate if necessary to rebalance.
 
 BinarySearchTree([value=None])
 
 Functions:
-* insert(val) - Insert a value into the BST, creating a new BST node and placing it in the correct location.
+* insert(val) - Insert a value into the BST, creating a new BST node and placing it in the correct location.  If the tree becomes imbalanced, tree will rotate until it becomes balanced.
 * contains(val) - Return True or False whether val is contained in the BST
 * size() - Return size (or number of nodes) in the BST
 * depth() - Return depth/height of the BST
 * balance() - Return integer indicating balance of BST: 0 for balanced, negatives for left-leaning, positive for right-leaning
-* delete(val) - Remove specified value from BST if it exists
+* delete(val) - Remove specified value from BST if it exists.  If the tree becomes imbalanced, tree will rotate until it becomes balanced.
 
 # Doubly Linked List
 ### Create a doubly linked list with nodes pointing forward and backward
