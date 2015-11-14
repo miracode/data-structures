@@ -1,6 +1,9 @@
 data-structures
 ===============
 
+## Run tests with
+```$ py.test```
+
 
 # Binary Heap
 ### Implementation of a min or max binary heap (default is max)
@@ -65,7 +68,7 @@ Functions:
 * insert(data) - insert data to head of linked list
 * size() - Return size of linked list
 * search(data) - Return node containing data in linked list if exists, otherwise None
-* remove(node) - Remove specified node from list
+* remove(data) - Remove first node with this data value in this list.
 * print_tuple() - Print entire linked list as a tuple literal
 
 
