@@ -10,7 +10,7 @@ class Node(object):
         self.next = next
 
 
-class Linked_list(object):
+class LinkedList(object):
 
     def __init__(self, *args):
         self.size = 0
@@ -27,7 +27,7 @@ class Linked_list(object):
         return x
 
     def insert(self, data):
-        """Insert a dataue to the head of a linked list"""
+        """Insert a data to the head of a linked list"""
         new_node = Node(data, self.first_node)
         self.first_node = new_node
         self.size += 1
@@ -37,7 +37,7 @@ class Linked_list(object):
         return self.size
 
     def search(self, data):
-        """Return node containing dataue in linked list"""
+        """Return node containing data in linked list"""
         n = self.first_node
         while True:
             if n.data == data:
