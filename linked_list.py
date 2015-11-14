@@ -45,20 +45,17 @@ class LinkedList(object):
             n = n.next
         return None
 
-    def remove(self, node):
-        """Remove specified node from linked list"""
-        if self.first_node == node:
+    def remove(self, data):
+        """Remove first node with matching data in linked list"""
+        node = self.first_node
+        if node.data == data:
             self.first_node = self.first_node.next
-        else:
-            c_node = self.first_node.next
-            prev = self.first_node
-
-            while True:
-                if c_node == node:
-                    prev.next = c_node.next
-                    break
-                prev = c_node
-                c_node = c_node.next
+            return self
+        while node.next:
+            if node.next.data == data:
+                node.next = node.next.next
+                return self
+            node = node.next
 
     def print_tuple(self):
         """Print entire linked list as a tuple literal"""
