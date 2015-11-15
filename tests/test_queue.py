@@ -1,71 +1,71 @@
 # -*- coding: utf-8 -*-
 import unittest
-import queue
+from queue import Queue
 
 
 class QueueTest(unittest.TestCase):
     def test_enqueue(self):
         """test that enqueue works on one node"""
-        tqueue = queue.Queue()
+        q = Queue()
         val = 9
-        tqueue.enqueue(val)
-        self.assertEqual(tqueue.first_node.data, val)
-        self.assertEqual(tqueue.last_node.data, val)
+        q.enqueue(val)
+        self.assertEqual(q.first_node.data, val)
+        self.assertEqual(q.last_node.data, val)
 
     def test_large_enqueue(self):
         """test that enqueue works on multiple node queue"""
-        tqueue = queue.Queue()
-        tqueue.enqueue(1)
-        tqueue.enqueue('a')
-        tqueue.enqueue('bob')
-        tqueue.enqueue(10)
-        self.assertEqual(tqueue.first_node.data, 1)
-        self.assertEqual(tqueue.last_node.data, 10)
+        q = Queue()
+        q.enqueue(1)
+        q.enqueue('a')
+        q.enqueue('bob')
+        q.enqueue(10)
+        self.assertEqual(q.first_node.data, 1)
+        self.assertEqual(q.last_node.data, 10)
 
     def test_dequeue(self):
-        tqueue = queue.Queue()
-        tqueue.enqueue(1)
-        tqueue.enqueue('a')
-        tqueue.enqueue('bob')
-        tqueue.enqueue(1.0)
-        actual = tqueue.dequeue()
+        q = Queue()
+        q.enqueue(1)
+        q.enqueue('a')
+        q.enqueue('bob')
+        q.enqueue(1.0)
+        actual = q.dequeue()
         self.assertEquals(actual, 1)
-        self.assertEquals(tqueue.first_node.data, 'a')
-        self.assertEquals(tqueue.last_node.data, 1.0)
+        self.assertEquals(q.first_node.data, 'a')
+        self.assertEquals(q.last_node.data, 1.0)
 
     def test_null_dequeue(self):
-        tqueue = queue.Queue()
+        q = Queue()
         with self.assertRaises(IndexError) as context:
-            tqueue.dequeue()
+            q.dequeue()
         self.assertEqual(context.exception.message,
                          'Queue is empty, cannot dequeue.')
 
     def test_size(self):
-        tqueue = queue.Queue()
-        self.assertEquals(tqueue.size(), 0)
-        tqueue.enqueue(1)
-        tqueue.enqueue('a')
-        tqueue.enqueue('bob')
-        tqueue.enqueue(1.0)
-        self.assertEquals(tqueue.size(), 4)
+        q = Queue()
+        self.assertEquals(q.size(), 0)
+        q.enqueue(1)
+        q.enqueue('a')
+        q.enqueue('bob')
+        q.enqueue(1.0)
+        self.assertEquals(q.size(), 4)
 
     def test_peek(self):
-        tqueue = queue.Queue()
+        q = Queue()
         with self.assertRaises(IndexError) as context:
-            tqueue.peek()
+            q.peek()
         self.assertEqual(context.exception.message,
                          'Queue is empty, cannot peek.')
-        tqueue.enqueue(1)
-        tqueue.enqueue('a')
-        tqueue.enqueue('bob')
-        tqueue.enqueue(1.0)
-        self.assertEquals(tqueue.peek(), 1)
+        q.enqueue(1)
+        q.enqueue('a')
+        q.enqueue('bob')
+        q.enqueue(1.0)
+        self.assertEquals(q.peek(), 1)
 
     def test_is_empty(self):
-        tqueue = queue.Queue()
-        self.assertTrue(tqueue.is_empty())
-        tqueue.enqueue(1)
-        self.assertFalse(tqueue.is_empty())
+        q = Queue()
+        self.assertTrue(q.is_empty())
+        q.enqueue(1)
+        self.assertFalse(q.is_empty())
 
 if __name__ == '__main__':
     unittest.main()
