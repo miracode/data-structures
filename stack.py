@@ -6,15 +6,15 @@ from linked_list import Node
 class Stack(object):
 
     def __init__(self):
-        self.first_node = None
+        self.top_node = None
 
     def push(self, data):
-        self.first_node = Node(data, self.first_node)
+        self.top_node = Node(data, self.top_node)
 
     def pop(self):
-        if self.first_node is None:
+        if not self.top_node:
             raise IndexError('Stack is empty, cannot pop value.')
         else:
-            x = self.first_node
-            self.first_node = self.first_node.next
-            return x
+            node = self.top_node
+            self.top_node = self.top_node.next
+            return node
