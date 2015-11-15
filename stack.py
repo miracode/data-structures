@@ -14,7 +14,6 @@ class Stack(object):
     def pop(self):
         if not self.top_node:
             raise IndexError('Stack is empty, cannot pop value.')
-        else:
-            node = self.top_node
-            self.top_node = self.top_node.next
-            return node
+        node = self.top_node
+        self.top_node = self.top_node.next
+        return node
