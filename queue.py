@@ -2,41 +2,40 @@
 
 
 class Node:
-    def __init__(self):
-        self.data = None
-        self.next = None
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
 
 
 class Queue:
     def __init__(self):
-        self.first_node = Node()
+        self.first_node = None
+        self.last_node = None
 
-    def enqueue(self, val):
-        if (self.first_node.data, self.first_node.next) == (None, None):
-            self.first_node.data = val
-        else:
-            current = self.first_node
-            while current.next is not None:
-                current = current.next
-            last_node = Node()
-            last_node.data = val
-            current.next = last_node
+    def enqueue(self, data):
+        node = Node(data)
+        if self.last_node:
+            self.last_node.next = node
+        self.last_node = node
+        if not self.first_node:
+            self.first_node = self.last_node
 
     def dequeue(self):
-        if (self.first_node.data, self.first_node.next) == (None, None):
+        if not self.first_node:
             raise IndexError('Queue is empty, cannot dequeue.')
-        else:
-            dequeue_node = self.first_node
-            self.first_node = self.first_node.next
-            return dequeue_node
+        data = self.first_node.data
+        self.first_node = self.first_node.next
+        if not self.first_node:
+            self.last_node = None
+        return data
 
     def size(self):
-        if (self.first_node.data, self.first_node.next) == (None, None):
+        if not self.first_node:
             return 0
         else:
             size_count = 1
             current = self.first_node
-            while current.next is not None:
+            while current.next:
                 size_count += 1
                 current = current.next
             return size_count
