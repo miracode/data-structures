@@ -41,5 +41,11 @@ class StackTest(unittest.TestCase):
         stack.push('b')
         self.assertEqual(stack.peek(), 'b')
 
+    def test_is_empty(self):
+        stack = Stack()
+        self.assertTrue(stack.is_empty())
+        stack.push('a')
+        self.assertFalse(stack.is_empty())
+
 if __name__ == '__main__':
     unittest.main()

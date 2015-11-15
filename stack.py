@@ -22,3 +22,6 @@ class Stack(object):
         if not self.top_node:
             raise IndexError('Stack is empty, cannot peek value.')
         return self.top_node.data
+
+    def is_empty(self):
+        return self.top_node is None
