@@ -17,3 +17,8 @@ class Stack(object):
         node = self.top_node
         self.top_node = self.top_node.next
         return node
+
+    def peek(self):
+        if not self.top_node:
+            raise IndexError('Stack is empty, cannot peek value.')
+        return self.top_node.data

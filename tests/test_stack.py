@@ -31,5 +31,15 @@ class StackTest(unittest.TestCase):
         assert x.data == 'a'
         assert t_stack.top_node.data == 8
 
+    def test_peek(self):
+        stack = Stack()
+        with self.assertRaises(IndexError) as context:
+            stack.peek()
+        self.assertEqual(context.exception.message,
+                         'Stack is empty, cannot peek value.')
+        stack.push('a')
+        stack.push('b')
+        assert stack.peek() == 'b'
+
 if __name__ == '__main__':
     unittest.main()
