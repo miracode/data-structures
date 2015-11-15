@@ -37,22 +37,28 @@ class Graph(object):
         return [edge.node_vals for edge in self.edges_list]
 
     def add_node(self, node_val):
-        """Add new node value to the graph and return node"""
+        """Add new node value to the graph"""
         if node_val in self.nodes():
             raise ValueError("Node already exists in graph")
         else:
             node = Node(node_val)
             self.nodes_list.append(node)
-            return node
 
     def add_edge(self, n1, n2, weight=None):
         """Add new edge to graph with given node values"""
         # If node already exists in graph, use, otherwise create
-        node1_filter = filter(lambda x: x.value == n1, self.nodes_list)
-        node1 = node1_filter[0] if node1_filter else None or self.add_node(n1)
-        node2_filter = filter(lambda x: x.value == n2, self.nodes_list)
-        node2 = node2_filter[0] if node2_filter else None or self.add_node(n2)
-
+        try:
+            spot1 = self.nodes().index(n1)
+            node1 = self.nodes_list[spot1]
+        except ValueError:
+            self.add_node(n1)
+            node1 = self.nodes_list[-1]
+        try:
+            spot2 = self.nodes().index(n2)
+            node2 = self.nodes_list[spot2]
+        except ValueError:
+            self.add_node(n2)
+            node2 = self.nodes_list[-1]
         new_edge = Edge(node1, node2, weight)
         self.edges_list.append(new_edge)
 
