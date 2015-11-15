@@ -49,6 +49,23 @@ class QueueTest(unittest.TestCase):
         tqueue.enqueue(1.0)
         self.assertEquals(tqueue.size(), 4)
 
+    def test_peek(self):
+        tqueue = queue.Queue()
+        with self.assertRaises(IndexError) as context:
+            tqueue.peek()
+        self.assertEqual(context.exception.message,
+                         'Queue is empty, cannot peek.')
+        tqueue.enqueue(1)
+        tqueue.enqueue('a')
+        tqueue.enqueue('bob')
+        tqueue.enqueue(1.0)
+        self.assertEquals(tqueue.peek(), 1)
+
+    def test_is_empty(self):
+        tqueue = queue.Queue()
+        self.assertTrue(tqueue.is_empty())
+        tqueue.enqueue(1)
+        self.assertFalse(tqueue.is_empty())
 
 if __name__ == '__main__':
     unittest.main()

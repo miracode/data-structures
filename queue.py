@@ -39,3 +39,11 @@ class Queue:
                 size_count += 1
                 current = current.next
             return size_count
+
+    def peek(self):
+        if not self.first_node:
+            raise IndexError('Queue is empty, cannot peek.')
+        return self.first_node.data
+
+    def is_empty(self):
+        return self.first_node is None
