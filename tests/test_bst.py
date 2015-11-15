@@ -330,5 +330,62 @@ class BSTTest(unittest.TestCase):
         #        15   26
         #       /     / \
         #      10     24 27
- 
+
         self.assertEquals(26, test_bst.right.value)
+
+
+def test_in_order_traversal(capsys):
+    #          20
+    #         /  \
+    #        15   25
+    #       /     /\
+    #      10    24 26
+    #                \
+    #                 27
+    vals = [20, 15, 25, 10, 26, 24, 27]
+    test_bst = bst.BinarySearchTree()
+    for val in vals:
+        test_bst.insert(val)
+    test_bst.in_order_traversal(test_bst)
+    out, err = capsys.readouterr()
+    expected = ['10', '15', '20', '24', '25', '26', '27']
+    actual = out.split('\n')[:-1]
+    assert actual == expected
+
+
+def test_pre_order_traversal(capsys):
+    #          20
+    #         /  \
+    #        15   25
+    #       /     /\
+    #      10    24 26
+    #                \
+    #                 27
+    vals = [20, 15, 25, 10, 26, 24, 27]
+    test_bst = bst.BinarySearchTree()
+    for val in vals:
+        test_bst.insert(val)
+    test_bst.pre_order_traversal(test_bst)
+    out, err = capsys.readouterr()
+    expected = ['20', '10', '15', '24', '25', '26', '27']
+    actual = out.split('\n')[:-1]
+    assert actual == expected
+
+
+def test_post_order_traversal(capsys):
+    #          20
+    #         /  \
+    #        15   25
+    #       /     /\
+    #      10    24 26
+    #                \
+    #                 27
+    vals = [20, 15, 25, 10, 26, 24, 27]
+    test_bst = bst.BinarySearchTree()
+    for val in vals:
+        test_bst.insert(val)
+    test_bst.post_order_traversal(test_bst)
+    out, err = capsys.readouterr()
+    expected = ['10', '15', '24', '25', '26', '27', '20']
+    actual = out.split('\n')[:-1]
+    assert actual == expected

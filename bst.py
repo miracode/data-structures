@@ -311,3 +311,21 @@ class BinarySearchTree(object):
             return node.value
         else:
             return self._max_left_val(node.right)
+
+    def in_order_traversal(self, node):
+        if node:
+            self.in_order_traversal(node.left)
+            print node.value
+            self.in_order_traversal(node.right)
+
+    def pre_order_traversal(self, node):
+        if node:
+            print node.value
+            self.in_order_traversal(node.left)
+            self.in_order_traversal(node.right)
+
+    def post_order_traversal(self, node):
+        if node:
+            self.in_order_traversal(node.left)
+            self.in_order_traversal(node.right)
+            print node.value
