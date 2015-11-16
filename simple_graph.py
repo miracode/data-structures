@@ -18,8 +18,11 @@ class Edge(object):
     def __init__(self, n1=Node(), n2=Node(), weight=None):
         self.n1 = n1
         self.n2 = n2
-        self.node_vals = (n1.value, n2.value)
         self.weight = weight
+
+    @property
+    def node_vals(self):
+        return (self.n1.value, self.n2.value)
 
 
 class Graph(object):
@@ -49,9 +52,9 @@ class Graph(object):
         """Add new edge to graph with given node values"""
         # If node already exists in graph, use, otherwise create
         node1_filter = filter(lambda x: x.value == n1, self.nodes_list)
-        node1 = node1_filter[0] if node1_filter else None or self.add_node(n1)
+        node1 = node1_filter[0] if node1_filter else self.add_node(n1)
         node2_filter = filter(lambda x: x.value == n2, self.nodes_list)
-        node2 = node2_filter[0] if node2_filter else None or self.add_node(n2)
+        node2 = node2_filter[0] if node2_filter else self.add_node(n2)
 
         new_edge = Edge(node1, node2, weight)
         self.edges_list.append(new_edge)
@@ -156,9 +159,9 @@ class Graph(object):
 
     def weight_edge(self, n1, n2):
         """Return the weight of the edge connecting two nodes"""
-        # Check that edge exists
-        if self.adjacent(n1, n2):
-            return self._get_edge_containing_nodes(n1, n2).weight
+        edge = self._get_edge_containing_nodes(n1, n2)
+        if edge:
+            return edge.weight
         else:
             raise ValueError(u"Edge does not exist in graph.")
 
@@ -178,7 +181,6 @@ class Graph(object):
                 if not neighb.visited:
                     alt = (curr.distance +
                            self.weight_edge(curr.value, neighb.value))
-                    print "alt", alt, 'neighb.distance', neighb.distance
                     if alt < neighb.distance:
                         neighb.distance = alt
                         neighb.previous = curr
