@@ -148,7 +148,7 @@ exist in graph.")
         n2 = 'n2'
         with self.assertRaises(ValueError) as context:
             g.adjacent(n1, n2)
-        self.assertEqual(context.exception.message, u"Node does not exist \
+        self.assertEqual(context.exception.message, u"Node n1 does not exist \
 in graph.")
 
     def test_dft(self):
@@ -187,7 +187,7 @@ in graph.")
         assert g.weight_edge(1, 2) == 3
         with self.assertRaises(ValueError) as context:
             g.weight_edge(1, 5)
-        self.assertEqual(context.exception.message, u"Node does not exist \
+        self.assertEqual(context.exception.message, u"Node 5 does not exist \
 in graph.")
         g.add_node(5)
         with self.assertRaises(ValueError) as context:

@@ -85,19 +85,14 @@ class Graph(object):
 
     def has_node(self, n):
         """Returns True if node is in the graph, otherwise False"""
-        if n in self.nodes():
-            return True
-        else:
-            return False
+        return n in self.nodes()
 
     def _neighbors(self, n):
         """Return list of node objects connected to given node"""
-        neighb = []
-        for edge in self.edges_list:
-            if edge.n1.value == n:
-                neighb.append(edge.n2)
-            if edge.n2.value == n:
-                neighb.append(edge.n1)
+        neighb_edges = filter(lambda x: x.n1.value == n or x.n2.value == n,
+                              self.edges_list)
+        neighb = [edge.n1 if edge.n1.value != n else edge.n2
+                  for edge in neighb_edges]
         return neighb
 
     def neighbors(self, n):
@@ -109,16 +104,14 @@ class Graph(object):
 
     def _return_edge(self, n1, n2):
         """Returns edge object connecting n1 and n2"""
-        return_edge = False
         if not self.has_node(n1):
-            raise ValueError(u"Node does not exist in graph.")
+            raise ValueError(u"Node {} does not exist in graph.".format(n1))
         elif not self.has_node(n2):
-            raise ValueError(u"Node does not exist in graph.")
+            raise ValueError(u"Node {} does not exist in graph.".format(n2))
         else:
-            for edge in self.edges_list:
-                if n1 in edge.node_vals and n2 in edge.node_vals:
-                    return_edge = edge
-        return return_edge
+            return_edge = filter(lambda x: n1 in x.node_vals and
+                                 n2 in x.node_vals, self.edges_list)
+        return return_edge[0] if return_edge else None
 
     def adjacent(self, n1, n2):
         """Returns True if edge connects two nodes, False if not"""
@@ -126,16 +119,11 @@ class Graph(object):
 
     def _return_node(self, value):
         """Return node with specified value"""
-        if self.has_node(value):
-            # Find the node with the value
-            i = 0
-            start_node = self.nodes_list[0]
-            while start_node.value != value:
-                i += 1
-                start_node = self.nodes_list[i]
-            return start_node
+        node = filter(lambda x: x.value == value, self.nodes_list)
+        if node:
+            return node[0]
         else:
-            raise ValueError("Start node does not exist in graph.")
+            raise ValueError("Node {} does not exist in graph.".format(value))
 
     def depth_first_traversal(self, start):
         """
