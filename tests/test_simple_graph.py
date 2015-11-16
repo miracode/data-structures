@@ -153,6 +153,9 @@ exist in graph.")
 in graph.")
 
     def test_dft(self):
+        # 1 - 2 - 3
+        #   \ |
+        #     4
         n1 = 1
         n2 = 2
         n3 = 3
@@ -163,7 +166,7 @@ in graph.")
         g.add_edge(n1, n4)
         g.add_edge(n2, n3)
         actual = g.depth_first_traversal(n1)
-        expected = [1, 4, 2, 3]
+        expected = [1, 2, 4, 3]
         assert actual == expected
 
     def test_bft(self):

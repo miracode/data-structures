@@ -122,22 +122,34 @@ class Graph(object):
         """Returns True if edge connects two nodes, False if not"""
         return bool(self._get_edge_containing_nodes(n1, n2))
 
-    def depth_first_traversal(self, start):
+    def depth_first_traversal(self, start, dft_list=None):
         """
         Return nodes that are viewed in the order of depth first traversal
         """
+        ## Recursive implementation
+        dft_list = dft_list or []
         start_node = self._get_node(start)
-        # Initialize list
-        dft_list = []
-        dft_stack = [start_node]
-        while dft_stack:
-            v = dft_stack.pop()
-            if not v.visited:
-                v.visited = True
-                dft_list.append(v.value)
-                for neighb in self._neighbors(v.value):
-                    dft_stack.append(neighb)
+        if start_node:
+            dft_list.append(start_node.value)
+            start_node.visited = True
+            for neighb in self._neighbors(start_node.value):
+                if not neighb.visited:
+                    dft_list = self.depth_first_traversal(neighb.value, dft_list)
         return dft_list
+
+        ## Stack implementation
+        # start_node = self._get_node(start)
+        # # Initialize list
+        # dft_list = []
+        # dft_stack = [start_node]
+        # while dft_stack:
+        #     v = dft_stack.pop()
+        #     if not v.visited:
+        #         v.visited = True
+        #         dft_list.append(v.value)
+        #         for neighb in self._neighbors(v.value):
+        #             dft_stack.append(neighb)
+        # return dft_list
 
     def breadth_first_traversal(self, start):
         """
