@@ -92,6 +92,7 @@ class GraphTest(unittest.TestCase):
         new_node2 = 2
         new_node3 = simple_graph.Node('nope')
         g.add_edge(new_node1, new_node2)
+        g.add_node(new_node3)
         with self.assertRaises(ValueError) as context:
             g.del_edge(new_node1, new_node3)
         self.assertEqual(context.exception.message, u"Edge does not exist \

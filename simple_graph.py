@@ -56,31 +56,44 @@ class Graph(object):
         new_edge = Edge(node1, node2, weight)
         self.edges_list.append(new_edge)
 
+    def _get_node(self, n):
+        """Return node with specified value"""
+        node = filter(lambda x: x.value == n, self.nodes_list)
+        return node[0] if node else None
+
+    def _get_edges_containing_node(self, n):
+        return filter(lambda x: n in x.node_vals, self.edges_list)
+
+    def _get_edge_containing_nodes(self, n1, n2):
+        """Returns edge object connecting n1 and n2"""
+        if not self.has_node(n1):
+            raise ValueError(u"Node {} does not exist in graph.".format(n1))
+        elif not self.has_node(n2):
+            raise ValueError(u"Node {} does not exist in graph.".format(n2))
+        else:
+            edge = filter(lambda x: n1 in x.node_vals and
+                          n2 in x.node_vals, self.edges_list)
+        return edge[0] if edge else None
+
     def del_node(self, n):
         """Delete specified node from the graph"""
 
-        node_to_delete = filter(lambda x: x.value == n, self.nodes_list)
+        node_to_delete = self._get_node(n)
+        if node_to_delete:
+            self.nodes_list.remove(node_to_delete)
+        else:
+            raise ValueError(u"Node does not exist in graph.")
 
-        for node in node_to_delete:
-            self.nodes_list.remove(node)
-
-        edges_to_delete = filter(lambda x: n in x.node_vals, self.edges_list)
-
+        edges_to_delete = self._get_edges_containing_node(n)
         for edge in edges_to_delete:
             self.edges_list.remove(edge)
 
-        if not node_to_delete:
-            raise ValueError(u"Node does not exist in graph.")
-
     def del_edge(self, n1, n2):
         """Delete edge connecting specified nodes"""
-        edge_in_graph = False
-        for edge in self.edges_list:
-            if n1 in edge.node_vals and n2 in edge.node_vals:
-                self.edges_list.remove(edge)
-                edge_in_graph = True
-
-        if not edge_in_graph:
+        edge_to_delete = self._get_edge_containing_nodes(n1, n2)
+        if edge_to_delete:
+            self.edges_list.remove(edge_to_delete)
+        else:
             raise ValueError(u"Edge does not exist in graph.")
 
     def has_node(self, n):
@@ -102,34 +115,15 @@ class Graph(object):
         else:
             return [node.value for node in self._neighbors(n)]
 
-    def _return_edge(self, n1, n2):
-        """Returns edge object connecting n1 and n2"""
-        if not self.has_node(n1):
-            raise ValueError(u"Node {} does not exist in graph.".format(n1))
-        elif not self.has_node(n2):
-            raise ValueError(u"Node {} does not exist in graph.".format(n2))
-        else:
-            return_edge = filter(lambda x: n1 in x.node_vals and
-                                 n2 in x.node_vals, self.edges_list)
-        return return_edge[0] if return_edge else None
-
     def adjacent(self, n1, n2):
         """Returns True if edge connects two nodes, False if not"""
-        return bool(self._return_edge(n1, n2))
-
-    def _return_node(self, value):
-        """Return node with specified value"""
-        node = filter(lambda x: x.value == value, self.nodes_list)
-        if node:
-            return node[0]
-        else:
-            raise ValueError("Node {} does not exist in graph.".format(value))
+        return bool(self._get_edge_containing_nodes(n1, n2))
 
     def depth_first_traversal(self, start):
         """
         Return nodes that are viewed in the order of depth first traversal
         """
-        start_node = self._return_node(start)
+        start_node = self._get_node(start)
         # Initialize list
         dft_list = []
         dft_stack = [start_node]
@@ -147,7 +141,7 @@ class Graph(object):
         Return nodes that are viewed in order of breadth first traversal
         """
         # Make sure the node exists
-        start_node = self._return_node(start)
+        start_node = self._get_node(start)
         # Initialize list and flip the start visited flag to True
         bft_list = []
         bft_queue = deque([start_node])
@@ -164,14 +158,14 @@ class Graph(object):
         """Return the weight of the edge connecting two nodes"""
         # Check that edge exists
         if self.adjacent(n1, n2):
-            return self._return_edge(n1, n2).weight
+            return self._get_edge_containing_nodes(n1, n2).weight
         else:
             raise ValueError(u"Edge does not exist in graph.")
 
     def dikstra(self, start):
         """Return shortest path according to Dikstra's algorithm"""
         # Find the node with the start value:
-        start_node = self._return_node(start)
+        start_node = self._get_node(start)
         start_node.distance = 0
         # Create priority queue
         dpq = PriorityQueue()
@@ -198,7 +192,7 @@ class Graph(object):
 
     def bellman_ford(self, start):
         """Returns weights and predecessors of following bellman ford path"""
-        start_node = self._return_node(start)
+        start_node = self._get_node(start)
         start_node.distance = 0
         weight = []
         previous = []
@@ -223,7 +217,7 @@ class Graph(object):
     # cant figure one out
 
     # def a_star(self, start, finish):
-    #     start_node = self._return_node(start)
+    #     start_node = self._get_node(start)
     #     closedlist = []
     #     openlist = [start_node]
     #     camefrom = []
