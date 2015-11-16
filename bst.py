@@ -57,93 +57,55 @@ class BinarySearchTree(object):
             if node.parent.balance_factor != 0:
                 self._update_balance(node.parent)
 
-    # def _rebalance(self, node):
-    #     pass
+    def _rotate(self, root, side='left'):
+        """Rotate BST in the direction corresponding to the side"""
+        if side == 'left':
+            other_side = 'right'
+        elif side == 'right':
+            other_side = 'left'
 
-    def _rotate_left(self, root_node):
-        """Rotate left by changing values and pointers."""
-        ## make root_node the left child of its right child
-        # make a new node for new left child
-        new_left = BinarySearchTree(root_node.value)
-        # make the left child of the new node the same as what was left of root
-        new_left.left = root_node.left
-        if new_left.left:
-            new_left.left.parent = new_left
-        # if the new root node (aka the right child of root node) has a left
-        # child it is now the right child of the new left node
-        if root_node.right.left:
-            new_left.right = root_node.right.left
-            new_left.right.parent = new_left
-        # the new parent should point back to root node
-        new_left.parent = root_node
-        new_left.balance_factor = root_node.balance_factor
+        # Make the root node the child of the other side on the same side
+        # (i.e.) for left rotation, root becomes left child of its right child.
+        new = BinarySearchTree(root.value)
 
-        # the root node should now reflect the right child
-        root_node.value = root_node.right.value
-        # update new root's bal factor
-        root_node.balance_factor = root_node.right.balance_factor
-        # the new right child should be the old right child's right child
-        root_node.right = root_node.right.right
-        # point the right child at new parent
-        if root_node.right:
-            root_node.right.parent = root_node
-        # this way the root_node's parent can remain untouched.
-        # point new root to new left
-        root_node.left = new_left
+        # Give new new node values of root.
+        setattr(new, side, getattr(root, side))
+        if getattr(new, side):
+            getattr(new, side).parent = new
 
-        # update left BF to be old root BF + 1 - min(old_root.right.BF, 0)
-        root_node.left.balance_factor += (1 - min(root_node.balance_factor, 0))
-        # the new root bal factor should be the new root's bal factor + 1 -
-        # the max(old root current bal factor, 0)
-        root_node.balance_factor += (1 + max(root_node.left.balance_factor, 0))
+        if getattr(getattr(root, other_side), side):
+            setattr(new, other_side, getattr(getattr(root, other_side), side))
+            getattr(new, other_side).parent = new
 
-    def _rotate_right(self, root_node):
-        """Rotate right by changing values and pointers."""
-        ## make root_node the left child of its right child
-        # make a new node for new right child
-        new_right = BinarySearchTree(root_node.value)
-        # make the right child of the new node the same as what was
-        # right of root
-        new_right.right = root_node.right
-        if new_right.right:
-            new_right.right.parent = new_right
-        # if the new root node (aka the left child of root node) has a right
-        # child it is now the left child of the new right node
-        if root_node.left.right:
-            new_right.left = root_node.left.right
-            new_right.left.parent = new_right
-        # the new parent should point back to root node
-        new_right.parent = root_node
-        new_right.balance_factor = root_node.balance_factor
+        new.parent = root
+        new.balance_factor = root.balance_factor
 
-        # the root node should now reflect the left child
-        root_node.value = root_node.left.value
-        # update new root's bal factor
-        root_node.balance_factor = root_node.left.balance_factor
-        # the new left child should be the old left child's left child
-        root_node.left = root_node.left.left
-        # point the left child at new parent
-        if root_node.left:
-            root_node.left.parent = root_node
-        # this way the root_node's parent can remain untouched.
-        # point new root to new left
-        root_node.right = new_right
+        # Root should now be updated to become child
+        root.value = getattr(root, other_side).value
+        root.balance_factor = getattr(root, other_side).balance_factor
 
-        # update right BF to be old root BF - 1 - min(old_root.right.BF, 0)
-        root_node.right.balance_factor -= (1 - min(root_node.balance_factor, 0))
-        # the new root bal factor should be the new root's bal factor - 1 +
-        # the max(old root current bal factor, 0)
-        root_node.balance_factor -= (1 + max(root_node.right.balance_factor, 0))
+        setattr(root, other_side, getattr(getattr(root, other_side), other_side))
+        if getattr(root, other_side):
+            getattr(root, other_side).parent = root
+
+        setattr(root, side, new)
+
+        # Update the balance factor depending on side.
+        sign = 1
+        if side == 'right':
+            sign = -1
+        getattr(root, side).balance_factor += sign * (1 - min(root.balance_factor, 0))
+        root.balance_factor += sign * (1 + max(getattr(root, side).balance_factor, 0))
 
     def _rebalance(self, node):
         if node.balance_factor < 0:
             if node.right.balance_factor > 0:
-                self._rotate_right(node.right)
-            self._rotate_left(node)
+                self._rotate(node.right, side='right')
+            self._rotate(node, side='left')
         elif node.balance_factor > 0:
             if node.left.balance_factor < 0:
-                self._rotate_left(node.left)
-            self._rotate_right(node)
+                self._rotate(node.left, side='left')
+            self._rotate(node, side='right')
 
     def contains(self, val):
         """Return True if BST contains value, otherwise False"""
